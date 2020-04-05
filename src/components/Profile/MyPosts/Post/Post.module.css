@@ -1,0 +1,10 @@
+.item {
+    color: darkmagenta;
+}
+
+.item img {
+    width: 60px;
+    height: 55px;
+    border-radius: 25px;
+    alignment: left;
+}

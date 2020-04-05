@@ -3,11 +3,11 @@
     background-color: cornflowerblue;
 }
 
-.content img {
+.top_img {
     height: 200px;
-    margin: 0 0 0 40%;
+    width: max-content;
 }
 
-.item {
-    color: darkmagenta;
+.ava {
+    height: 150px;
 }
