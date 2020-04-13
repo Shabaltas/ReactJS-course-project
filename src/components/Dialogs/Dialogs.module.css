@@ -1,0 +1,26 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs__items {
+}
+
+.dialog {
+    display: block;
+    text-decoration: none;
+    margin: 5px;
+    color: black;
+}
+
+.item_active {
+    color: tomato;
+}
+
+.dialogs__messages {
+
+}
+
+.message {
+    text-effect: outline;
+}

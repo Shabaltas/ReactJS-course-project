@@ -1,8 +1,15 @@
 .top_img {
     height: 200px;
     width: max-content;
+    padding: 0;
 }
 
 .ava {
-    height: 150px;
+    height: 60px;
+    width: 70px;
+    border-radius: 25px;
+}
+
+.profile__info {
+    padding: 10px;
 }

@@ -12,10 +12,10 @@ import Settings from "./components/Settings/Settings";
 
 const App = () => {
     return (
+        <BrowserRouter>
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
-            <BrowserRouter>
                 <div className='app-wrapper__content'>
                     <Route path='/profile' component={Profile}/>
                     <Route path='/dialogs' component={Dialogs}/>
@@ -24,8 +24,9 @@ const App = () => {
                     <Route path='/settings' component={Settings}/>
                     <Route path="/" exact component={Profile} />
                 </div>
-            </BrowserRouter>
         </div>
+        </BrowserRouter>
+
     )
 };
 

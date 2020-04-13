@@ -1,3 +1,10 @@
 .my_posts_wrapper {
     padding: 5px;
 }
+
+.btnNewPost {
+    background-color: rgba(0, 139, 139, 0.4);
+    border-radius: 10px;
+    border-color: darkcyan;
+    margin: 3px;
+}
