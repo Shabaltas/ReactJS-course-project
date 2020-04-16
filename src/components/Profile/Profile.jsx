@@ -1,28 +1,12 @@
 import React from "react";
-import contentTop from "../../resources/personAva.jpg";
-import ava from "../../resources/ava.jpg";
-import s from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const ProfileInfo = () => {
-    return (
-        <div>
-            <div>
-                <img className={s.top_img} src={contentTop}/>
-            </div>
-            <div className={s.profile__info}>
-                <img className={s.ava} src={ava}/>
-                ava + disc
-            </div>
-        </div>
-    )
-};
-
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts posts={props.posts}/>
         </div>
     )
 };
