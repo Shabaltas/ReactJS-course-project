@@ -24,3 +24,7 @@
 .message {
     text-effect: outline;
 }
+
+.btn {
+    width: min-content;
+}

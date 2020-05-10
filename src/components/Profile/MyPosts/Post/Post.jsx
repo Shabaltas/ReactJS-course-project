@@ -5,7 +5,7 @@ import itemAva from "../../../../resources/personAva.jpg"
 const Post = (props) => {
     return (
         <div className={s.item}>
-            <img src={itemAva}/>
+            <img className="common_ava" src={itemAva}/>
             {props.msg}
             <div>
                 {

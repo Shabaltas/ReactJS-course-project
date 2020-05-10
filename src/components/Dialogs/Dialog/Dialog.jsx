@@ -4,11 +4,18 @@ import {NavLink} from "react-router-dom";
 
 const Dialog = (props) => {
     return (
-        <div>
-            <NavLink className={s.dialog} to={'/dialogs/' + props.id} activeClassName={s.item_active}>
-                {props.name}
-            </NavLink>
-        </div>
+        <table className={s.dialog}>
+            <tr>
+                <td>
+                    <img className="common_ava" src={props.photo}/>
+                </td>
+                <td>
+                    <NavLink to={'/dialogs/' + props.id} activeClassName={s.item_active}>
+                        {props.name}
+                    </NavLink>
+                </td>
+            </tr>
+        </table>
     )
 };
 

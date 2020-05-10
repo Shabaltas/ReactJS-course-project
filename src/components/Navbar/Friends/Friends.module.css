@@ -1,0 +1,14 @@
+.friends {
+    display: grid;
+    grid-template-columns: repeat(3, 4fr);
+}
+
+.friend{
+    width: min-content;
+}
+
+.friend_ava {
+    width: 50px;
+    height: 46px;
+    border-radius: 25px;
+}
