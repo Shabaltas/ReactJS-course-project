@@ -5,7 +5,7 @@ import Post from "./Post/Post.jsx";
 const MyPosts = (props) => {
     let newPostRef = React.createRef();
     const addPost = () => {
-        props.addPost(newPostRef.current.value);
+        props.addPost();
     };
     const changePostInput = () => {
         props.changePostInput(newPostRef.current.value)

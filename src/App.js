@@ -15,19 +15,19 @@ const App = (props) => {
         <BrowserRouter>
         <div className='app-wrapper'>
             <Header/>
-            <Navbar data={props.state.navbar}/>
+            <Navbar data={props.store.getState().navbar}/>
                 <div className='app-wrapper__content'>
-                    <Route path='/profile' render={() => <Profile data={props.state.profilePage}
-                                                                  addPost={props.addPost}
-                                                                  changePostInput={props.changePostInput}
+                    <Route path='/profile' render={() => <Profile data={props.store.getState().profilePage}
+                                                                  addPost={props.store.addPost.bind(props.store)}
+                                                                  changePostInput={props.store.changePostMsg.bind(props.store)}
                     />}/>
-                    <Route path='/dialogs' render={() => <Dialogs data={props.state.dialogsPage} addMessage={props.addMessage}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs data={props.store.getState().dialogsPage} addMessage={props.store.addMessage.bind(props.store)}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
-                    <Route path="/" exact render={() => <Profile data={props.state.profilePage}
-                                                                 addPost={props.addPost}
-                                                                 changePostInput={props.changePostInput}/>} />
+                    <Route path="/" exact render={() => <Profile data={props.store.getState().profilePage}
+                                                                 addPost={props.store.addPost.bind(props.store)}
+                                                                 changePostInput={props.store.changePostMsg.bind(props.store)}/>} />
                 </div>
         </div>
         </BrowserRouter>

@@ -1,6 +1,16 @@
 import React from 'react';
 import './index.css';
-import state from "./redux/state";
-import {renderApp} from "./render";
+import store from "./redux/state";
+import ReactDOM from "react-dom";
+import App from "./App";
 
-renderApp(state);
+export const renderApp = (store) => {
+    ReactDOM.render(
+        <React.StrictMode>
+            <App store={store}/>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+};
+store.subscribe(renderApp);
+renderApp(store);
