@@ -5,6 +5,7 @@ import {NavLink} from "react-router-dom";
 const Dialog = (props) => {
     return (
         <table className={s.dialog}>
+            <thead>
             <tr>
                 <td>
                     <img className="common_ava" src={props.photo}/>
@@ -15,6 +16,7 @@ const Dialog = (props) => {
                     </NavLink>
                 </td>
             </tr>
+            </thead>
         </table>
     )
 };

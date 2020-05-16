@@ -18,16 +18,15 @@ const App = (props) => {
             <Navbar data={props.store.getState().navbar}/>
                 <div className='app-wrapper__content'>
                     <Route path='/profile' render={() => <Profile data={props.store.getState().profilePage}
-                                                                  addPost={props.store.addPost.bind(props.store)}
-                                                                  changePostInput={props.store.changePostMsg.bind(props.store)}
-                    />}/>
-                    <Route path='/dialogs' render={() => <Dialogs data={props.store.getState().dialogsPage} addMessage={props.store.addMessage.bind(props.store)}/>}/>
+                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}
+                    />
+                    <Route path='/dialogs' render={() => <Dialogs data={props.store.getState().dialogsPage} dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
                     <Route path="/" exact render={() => <Profile data={props.store.getState().profilePage}
-                                                                 addPost={props.store.addPost.bind(props.store)}
-                                                                 changePostInput={props.store.changePostMsg.bind(props.store)}/>} />
+                                                                 dispatch={props.store.dispatch.bind(props.store)}/>}
+                    />
                 </div>
         </div>
         </BrowserRouter>

@@ -2,11 +2,13 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
+import actionCreator from "../../redux/actionCreator";
 
 const Dialogs = (props) => {
     let newMessageRef = React.createRef();
     const addMessage = () => {
-        props.addMessage(newMessageRef.current.value);
+        let newMsg = newMessageRef.current.value;
+        props.dispatch(actionCreator.createAddMsgAction(newMsg));
         newMessageRef.current.value = '';
     };
     return (

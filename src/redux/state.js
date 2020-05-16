@@ -1,6 +1,7 @@
 import ava1 from "../resources/ava1.jpg";
 import ava2 from "../resources/ava2.jpg";
 import ava3 from "../resources/ava3.jpg";
+import {actionTypes} from "./actionTypes";
 
 let store = {
     _subscriber() {
@@ -35,13 +36,7 @@ let store = {
             ]
         }
     },
-    getState() {
-        return this._state;
-    },
-    subscribe(observer) {
-        this._subscriber = observer;
-    },
-    addPost() {
+    _addPost() {
         this._state.profilePage.posts.push({
             id: 5,
             msg: this._state.profilePage.changeablePostMsg,
@@ -50,7 +45,7 @@ let store = {
         this._state.profilePage.changeablePostMsg = '';
         this._subscriber(this);
     },
-    addMessage(msg) {
+    _addMessage(msg) {
         this._state.dialogsPage.messages.push({
             id: 5,
             text: msg
@@ -58,10 +53,29 @@ let store = {
         this._subscriber(this);
     },
 
-    changePostMsg(text) {
+    _changePostText(text) {
         this._state.profilePage.changeablePostMsg = text;
         debugger;
         this._subscriber(this);
-    }
+    },
+    getState() {
+        return this._state;
+    },
+    subscribe(observer) {
+        this._subscriber = observer;
+    },
+    dispatch(action) {
+        switch (action.type) {
+            case actionTypes.ADD_MSG:
+                this._addMessage(action.newMsg);
+                break;
+            case actionTypes.ADD_POST:
+                this._addPost();
+                break;
+            case actionTypes.UPDATE_NEW_POST_TXT:
+                this._changePostText(action.newText);
+                break;
+        }
+    },
 };
 export default store;

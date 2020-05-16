@@ -1,14 +1,16 @@
 import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post.jsx";
+import actionCreator from "../../../redux/actionCreator";
 
 const MyPosts = (props) => {
     let newPostRef = React.createRef();
     const addPost = () => {
-        props.addPost();
+        props.dispatch(actionCreator.createAddPostAction());
     };
     const changePostInput = () => {
-        props.changePostInput(newPostRef.current.value)
+        const newText = newPostRef.current.value;
+        props.dispatch(actionCreator.createUpdateNewPostTextAction(newText))
     };
     return (
         <div className={s.my_posts_wrapper}>
