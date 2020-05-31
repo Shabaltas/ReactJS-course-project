@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import store from "./redux/state";
+import store from "./redux/reduxState";
 import ReactDOM from "react-dom";
 import App from "./App";
 
@@ -12,5 +12,5 @@ export const renderApp = (store) => {
         document.getElementById('root')
     );
 };
-store.subscribe(renderApp);
+store.subscribe(renderApp.bind(undefined, store));
 renderApp(store);
