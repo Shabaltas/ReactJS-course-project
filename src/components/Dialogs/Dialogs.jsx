@@ -7,10 +7,13 @@ import actionCreator from "../../redux/actionCreator";
 const Dialogs = (props) => {
     let newMessageRef = React.createRef();
     const addMessage = () => {
-        let newMsg = newMessageRef.current.value;
-        props.dispatch(actionCreator.createAddMsgAction(newMsg));
-        newMessageRef.current.value = '';
+        props.dispatch(actionCreator.createAddMsgAction());
     };
+    const updateNewMsgText = () => {
+        let newMsg = newMessageRef.current.value;
+        props.dispatch(actionCreator.createUpdateNewMsgTextAction(newMsg));
+    };
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs__items}>
@@ -19,7 +22,7 @@ const Dialogs = (props) => {
             <div className={s.dialogs__messages}>
                 {props.data.messages.map(msg => <Message text={msg.text}/>)}
             </div>
-            <textarea ref={newMessageRef}/>
+            <textarea ref={newMessageRef} value={props.data.changeableMsgTxt} onChange={updateNewMsgText}/>
             <button onClick={addMessage} className={s.btn}> Send</button>
         </div>
     )

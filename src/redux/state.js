@@ -1,7 +1,9 @@
 import ava1 from "../resources/ava1.jpg";
 import ava2 from "../resources/ava2.jpg";
 import ava3 from "../resources/ava3.jpg";
-import {actionTypes} from "./actionTypes";
+import dialogReducer from "./reducer/dialogReducer";
+import profileReducer from "./reducer/profileReducer";
+import navbarReducer from "./reducer/navbarReducer";
 
 let store = {
     _subscriber() {
@@ -17,7 +19,8 @@ let store = {
             messages: [
                 {id: 1, text: "Hi!"},
                 {id: 2, text: "Bye."}
-            ]
+            ],
+            changeableMsgTxt: ''
         },
         profilePage: {
             posts: [
@@ -36,28 +39,6 @@ let store = {
             ]
         }
     },
-    _addPost() {
-        this._state.profilePage.posts.push({
-            id: 5,
-            msg: this._state.profilePage.changeablePostMsg,
-            likes: 0
-        });
-        this._state.profilePage.changeablePostMsg = '';
-        this._subscriber(this);
-    },
-    _addMessage(msg) {
-        this._state.dialogsPage.messages.push({
-            id: 5,
-            text: msg
-        });
-        this._subscriber(this);
-    },
-
-    _changePostText(text) {
-        this._state.profilePage.changeablePostMsg = text;
-        debugger;
-        this._subscriber(this);
-    },
     getState() {
         return this._state;
     },
@@ -65,17 +46,10 @@ let store = {
         this._subscriber = observer;
     },
     dispatch(action) {
-        switch (action.type) {
-            case actionTypes.ADD_MSG:
-                this._addMessage(action.newMsg);
-                break;
-            case actionTypes.ADD_POST:
-                this._addPost();
-                break;
-            case actionTypes.UPDATE_NEW_POST_TXT:
-                this._changePostText(action.newText);
-                break;
-        }
+        this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.navbar = navbarReducer(this._state.navbar, action);
+        this._subscriber(this);
     },
 };
 export default store;
