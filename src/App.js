@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, DefaultRoute} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 import './CustomApp.css';
 import Header from "./components/Header/Header";
@@ -9,24 +9,27 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import MyContext from "./MyContext";
 
-const App = (props) => {
+const App = () => {
     return (
         <BrowserRouter>
-        <div className='app-wrapper'>
-            <Header/>
-            <Navbar data={props.store.getState().navbar}/>
+            <div className='app-wrapper'>
+                <Header/>
+                <MyContext.Consumer>
+                    {(store) => <Navbar data={store.getState().navbar}/>}
+                </MyContext.Consumer>
                 <div className='app-wrapper__content'>
-                    <Route path='/profile' render={() => <Profile store={props.store}/>}
+                    <Route path='/profile' render={() => <Profile/>}
                     />
-                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
-                    <Route path="/" exact render={() => <Profile store={props.store}/>}
+                    <Route path="/" exact render={() => <Profile/>}
                     />
                 </div>
-        </div>
+            </div>
         </BrowserRouter>
 
     )

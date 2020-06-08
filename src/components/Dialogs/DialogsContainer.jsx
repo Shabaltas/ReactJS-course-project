@@ -1,17 +1,24 @@
 import React from 'react';
 import actionCreator from "../../redux/actionCreator";
 import Dialogs from "./Dialogs";
+import MyContext from "../../MyContext";
 
 const DialogsContainer = (props) => {
-    const addMessage = () => {
-        props.store.dispatch(actionCreator.createAddMsgAction());
-    };
-    const updateNewMsgText = (newMsg) => {
-        props.store.dispatch(actionCreator.createUpdateNewMsgTextAction(newMsg));
-    };
-
     return (
-        <Dialogs data={props.store.getState().dialogsPage} onAddMsg={addMessage} onChangeMsgInput={updateNewMsgText}/>
+        <MyContext.Consumer>
+            {
+                (store) => {
+                    const addMessage = () => {
+                        store.dispatch(actionCreator.createAddMsgAction());
+                    };
+                    const updateNewMsgText = (newMsg) => {
+                        store.dispatch(actionCreator.createUpdateNewMsgTextAction(newMsg));
+                    };
+                    return <Dialogs data={store.getState().dialogsPage} onAddMsg={addMessage}
+                                    onChangeMsgInput={updateNewMsgText}/>
+                }
+            }
+        </MyContext.Consumer>
     )
 };
 
