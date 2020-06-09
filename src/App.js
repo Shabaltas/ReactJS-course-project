@@ -3,22 +3,19 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 import './CustomApp.css';
 import Header from "./components/Header/Header";
-import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import MyContext from "./MyContext";
+import NavbarContainer from "./components/Navbar/NavbarContainer";
 
 const App = () => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
-                <MyContext.Consumer>
-                    {(store) => <Navbar data={store.getState().navbar}/>}
-                </MyContext.Consumer>
+                <NavbarContainer/>
                 <div className='app-wrapper__content'>
                     <Route path='/profile' render={() => <Profile/>}
                     />

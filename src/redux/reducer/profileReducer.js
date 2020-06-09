@@ -11,22 +11,28 @@ const initialState = {
 };
 
 function addPost(state) {
-    state.posts.push({
+    let copyState = {...state};
+    copyState.posts = [...state.posts];
+    copyState.posts.push({
         id: 5,
         msg: state.changeablePostMsg,
         likes: 0
     });
-    state.changeablePostMsg = '';
+    copyState.changeablePostMsg = '';
+    return copyState;
 }
 
+function updateNewPostTxt(state, newTxt) {
+    let copyState = {...state};
+    copyState.changeablePostMsg = newTxt;
+    return copyState;
+}
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_POST:
-            addPost(state);
-            break;
+            return addPost(state);
         case actionTypes.UPDATE_NEW_POST_TXT:
-            state.changeablePostMsg = action.newText;
-            break;
+            return updateNewPostTxt(state, action.newText);
     }
     return state;
 };
