@@ -17,20 +17,21 @@ const initialState = {
 };
 
 function addMsg(state) {
-    let copyState = {...state};
-    copyState.messages = [...state.messages];
-    copyState.messages.push({
-        id: 5,
-        text: state.changeableMsgTxt
-    });
-    copyState.changeableMsgTxt = '';
-    return copyState;
+    return {
+        ...state,
+        messages: [...state.messages, {
+            id: 5,
+            text: state.changeableMsgTxt
+        }],
+        changeableMsgTxt: ''
+    };
 }
 
 function updateNewMsgTxt(state, newTxt) {
-    let copyState = {...state};
-    copyState.changeableMsgTxt = newTxt;
-    return copyState;
+    return {
+        ...state,
+        changeableMsgTxt: newTxt
+    };
 }
 
 const dialogReducer = (state = initialState, action) => {

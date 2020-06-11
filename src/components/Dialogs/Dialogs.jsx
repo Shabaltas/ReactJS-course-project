@@ -10,10 +10,10 @@ const Dialogs = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs__items}>
-                {props.data.dialogs.map(dialog => <Dialog id={dialog.id} name={dialog.name} photo={dialog.photo}/>)}
+                {props.data.dialogs.map(dialog => <Dialog key={dialog.id} id={dialog.id} name={dialog.name} photo={dialog.photo}/>)}
             </div>
             <div className={s.dialogs__messages}>
-                {props.data.messages.map(msg => <Message text={msg.text}/>)}
+                {props.data.messages.map(msg => <Message key={msg.id} text={msg.text}/>)}
             </div>
             <textarea value={props.data.changeableMsgTxt} onChange={onChangeMsgInput}/>
             <button onClick={props.onAddMsg} className={s.btn}> Send</button>

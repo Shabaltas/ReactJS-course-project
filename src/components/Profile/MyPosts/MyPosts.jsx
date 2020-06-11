@@ -13,7 +13,7 @@ const MyPosts = (props) => {
                       onChange={onChangePostInput}/>
             <button className={s.btnNewPost} onClick={props.onAddPost}>New post</button>
             <div>
-                {props.data.posts.map(post => <Post msg={post.msg} likes={post.likes}/>)}
+                {props.data.posts.map(post => <Post key={post.id} msg={post.msg} likes={post.likes}/>)}
             </div>
         </div>
     )
