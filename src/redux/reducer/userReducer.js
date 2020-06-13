@@ -1,14 +1,7 @@
 import {actionTypes} from "../actionTypes";
-import ava1 from "../../resources/ava1.jpg";
-import ava2 from "../../resources/ava2.jpg";
-import ava3 from "../../resources/ava3.jpg";
 
 const initialState = {
-    users: [
-        {id: 1, name: 'Artyom', country: 'Belarus', followed: true, photo: ava1},
-        {id: 2, name: 'Nastya', country: 'Russia', followed: false, photo: ava2},
-        {id: 3, name: 'Igor', country: 'Germany', followed: true, photo: ava3},
-    ],
+    users: [ ],
 };
 
 function follow(state, userId) {
@@ -26,8 +19,9 @@ function unfollow(state, userId) {
 }
 
 function setUsers(state, users) {
+    debugger;
     return {
-        users: [...state.users, users]
+        users: [...state.users, ...users]
     }
 }
 

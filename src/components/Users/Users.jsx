@@ -1,21 +1,21 @@
 import React from "react";
 import User from "./User";
-import ava1 from "../../resources/ava1.jpg";
 import ava2 from "../../resources/ava2.jpg";
-import ava3 from "../../resources/ava3.jpg";
+import * as axios from 'axios';
 
 const Users = (props) => {
-    if (props.users.length === 0)
-        props.onSetUsers([
-            {id: 1, name: 'Artyom', country: 'Belarus', followed: true, photo: ava1},
-            {id: 2, name: 'Nastya', country: 'Russia', followed: false, photo: ava2},
-            {id: 3, name: 'Igor', country: 'Germany', followed: true, photo: ava3},
-        ]);
+    let getUsers = () => {
+        if (props.users.length === 0)
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => {
+                props.onSetUsers(res.data.items)
+            });
+    };
 
     return (
         <div>
+            <button onClick={getUsers}>Get users</button>
             {props.users.map(user => <User key={user.id} id={user.id} name={user.name} country={user.country}
-                                           followed={user.followed} photo={user.photo}
+                                           followed={user.followed} photo={user.photos.small ? user.photos.small : ava2}
                                            follow={props.onFollow} unfollow={props.onUnfollow}/>)}
         </div>
     )
