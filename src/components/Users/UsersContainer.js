@@ -2,10 +2,14 @@ import React from "react";
 import {connect} from "react-redux";
 import actionCreator from "../../redux/actionCreator";
 import Users from './Users';
+import dialogReducer from "../../redux/reducer/dialogReducer";
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        totalCount: state.usersPage.totalCount,
+        currentPage: state.usersPage.currentPage,
+        pageSize: state.usersPage.pageSize
     }
 };
 const mapDispatchToProps = (dispatch) => {
@@ -16,8 +20,8 @@ const mapDispatchToProps = (dispatch) => {
         onUnfollow: (userId) => {
             dispatch(actionCreator.createUnfollowAction(userId));
         },
-        onSetUsers: (users) => {
-            dispatch(actionCreator.createSetUsersAction(users));
+        onSetUsers: (users, totalCount, currentPage) => {
+            dispatch(actionCreator.createSetUsersAction(users, totalCount, currentPage));
         }
     }
 };

@@ -2,6 +2,9 @@ import {actionTypes} from "../actionTypes";
 
 const initialState = {
     users: [ ],
+    currentPage: 1,
+    totalCount: 0,
+    pageSize: 10
 };
 
 function follow(state, userId) {
@@ -18,10 +21,12 @@ function unfollow(state, userId) {
     };
 }
 
-function setUsers(state, users) {
-    debugger;
+function setUsers(state, users, totalCount, currentPage) {
     return {
-        users: [...state.users, ...users]
+        ...state,
+        users: [...users],
+        currentPage,
+        totalCount,
     }
 }
 
@@ -32,9 +37,10 @@ const usersReducer = (state = initialState, action) => {
         case actionTypes.UNFOLLOW:
             return unfollow(state, action.userId);
         case actionTypes.SET_USERS:
-            return setUsers(state, action.users);
+            return setUsers(state, action.users, action.totalCount, action.currentPage);
+        default:
+            return state;
     }
-    return state;
 };
 
 export default usersReducer;

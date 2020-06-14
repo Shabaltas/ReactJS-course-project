@@ -40,8 +40,9 @@ const dialogReducer = (state = initialState, action) => {
             return addMsg(state);
         case actionTypes.UPDATE_NEW_MSG_TXT:
             return updateNewMsgTxt(state, action.newText);
+        default:
+            return state;
     }
-    return state;
 };
 
 export default dialogReducer;

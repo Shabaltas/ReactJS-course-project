@@ -3,26 +3,28 @@ import {actionTypes} from "./actionTypes";
 const actionCreator = {
     createAddMsgAction: () => ({ type: actionTypes.ADD_MSG }),
     createAddPostAction: () => ({type: actionTypes.ADD_POST}),
-    createUpdateNewPostTextAction: (text) => ({
+    createUpdateNewPostTextAction: (newText) => ({
             type: actionTypes.UPDATE_NEW_POST_TXT,
-            newText: text
+            newText
         }),
-    createUpdateNewMsgTextAction: (text) => ({
+    createUpdateNewMsgTextAction: (newText) => ({
             type: actionTypes.UPDATE_NEW_MSG_TXT,
-            newText: text
+            newText
         }),
     createFollowAction: (userId) => ({
         type: actionTypes.FOLLOW,
-        userId: userId
+        userId
     }),
     createUnfollowAction: (userId) => ({
         type: actionTypes.UNFOLLOW,
-        userId: userId
+        userId
     }),
-    createSetUsersAction: (users) => ({
+    createSetUsersAction: (users, totalCount, currentPage) => ({
         type: actionTypes.SET_USERS,
-        users: users
-    })
+        users,
+        totalCount,
+        currentPage
+    }),
 };
 
 export default actionCreator;
