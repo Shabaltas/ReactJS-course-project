@@ -8,15 +8,5 @@ const mapStateToProps = (state) => {
         data: state.dialogsPage
     }
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onAddMsg: () => {
-            dispatch(actionCreator.createAddMsgAction());
-        },
-        onChangeMsgInput: (newMsg) => {
-            dispatch(actionCreator.createUpdateNewMsgTextAction(newMsg));
-        }
-    }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export default connect(mapStateToProps, actionCreator)(Dialogs);

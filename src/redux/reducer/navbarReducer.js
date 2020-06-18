@@ -1,6 +1,6 @@
-import ava1 from "../../resources/ava1.jpg";
-import ava2 from "../../resources/ava2.jpg";
-import ava3 from "../../resources/ava3.jpg";
+import ava1 from "../../resources/ava1.png";
+import ava2 from "../../resources/ava2.png";
+import ava3 from "../../resources/ava3.png";
 
 const initialState = {
     friends: [

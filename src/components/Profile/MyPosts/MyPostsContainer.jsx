@@ -8,14 +8,5 @@ const mapStateToProps = (state) => {
         data: state.profilePage
     }
 };
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onAddPost: () => {
-            dispatch(actionCreator.createAddPostAction());
-        },
-        onChangePostInput: (newText) => {
-            dispatch(actionCreator.createUpdateNewPostTextAction(newText));
-        }
-    }
-};
-export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+
+export default connect(mapStateToProps, actionCreator)(MyPosts);

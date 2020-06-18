@@ -4,7 +4,8 @@ const initialState = {
     users: [ ],
     currentPage: 1,
     totalCount: 0,
-    pageSize: 10
+    pageSize: 10,
+    isFetching: false
 };
 
 function follow(state, userId) {
@@ -30,6 +31,13 @@ function setUsers(state, users, totalCount, currentPage) {
     }
 }
 
+function toggleIsFetching(state, isFetching) {
+    return {
+        ...state,
+        isFetching
+    }
+}
+
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FOLLOW:
@@ -38,6 +46,8 @@ const usersReducer = (state = initialState, action) => {
             return unfollow(state, action.userId);
         case actionTypes.SET_USERS:
             return setUsers(state, action.users, action.totalCount, action.currentPage);
+        case actionTypes.TOGGLE_IS_FETCHING:
+            return toggleIsFetching(state, action.isFetching);
         default:
             return state;
     }

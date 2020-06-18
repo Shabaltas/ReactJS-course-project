@@ -7,7 +7,9 @@ const initialState = {
         {id: 3, msg: "dead", likes: 2},
         {id: 4, msg: "...", likes: 1}
     ],
-    changeablePostMsg: ''
+    changeablePostMsg: '',
+    profile: null,
+    isFetching: false
 };
 
 function addPost(state) {
@@ -28,12 +30,31 @@ function updateNewPostTxt(state, newTxt) {
         changeablePostMsg: newTxt
     };
 }
+
+function setProfile(state, profile) {
+    return {
+        ...state,
+        profile
+    };
+}
+
+function toggleIsFetching(state, isFetching) {
+    return {
+        ...state,
+        isFetching
+    }
+}
+
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_POST:
             return addPost(state);
         case actionTypes.UPDATE_NEW_POST_TXT:
             return updateNewPostTxt(state, action.newText);
+        case actionTypes.SET_PROFILE:
+            return setProfile(state, action.profile);
+        case actionTypes.TOGGLE_IS_FETCHING:
+            return toggleIsFetching(state, action.isFetching);
         default:
             return state;
     }
