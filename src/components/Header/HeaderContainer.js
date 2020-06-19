@@ -1,9 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import actionCreator from "../../redux/actionCreator";
-import * as axios from "axios";
-import configs from "../../configs";
 import Header from "./Header";
+import api from "../../api/api";
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
@@ -11,9 +10,9 @@ class HeaderContainer extends React.Component {
     };
 
     authMe = () => {
-        axios.get(configs.apiUrl+configs.apiAuthMeEndpoint, {withCredentials: true}).then(res => {
-            if (!res.data.resultCode) {
-                let {id, login, email} = res.data.data;
+        api.authMe().then(data => {
+            if (!data.resultCode) {
+                let {id, login, email} = data.data;
                 this.props.onSetAuthUser(id, email, login);
             }
         });

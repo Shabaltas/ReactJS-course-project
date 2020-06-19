@@ -2,9 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import actionCreator from "../../redux/actionCreator";
 import Users from './Users';
-import * as axios from "axios";
 import Preloader from "../Preloader/Preloader";
-import configs from "../../configs";
+import api from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -13,20 +12,14 @@ class UsersContainer extends React.Component {
 
     getUsers = (page) => {
         this.props.onToggleIsFetching(true);
-        axios.get(`${configs.apiUrl+configs.apiUsersEndpoint}?page=${page}&count=${this.props.pageSize}`,
-            {
-                withCredentials: true,
-                headers: {
-                "api-key": "1b44dd06-2645-4fda-bc7a-6c8f3e5f9b32"
-                }
-            })
-            .then(res => {
+        api.getUsers(page, this.props.pageSize).then(data => {
             this.props.onToggleIsFetching(false);
-            this.props.onSetUsers(res.data.items, res.data.totalCount, page);
+            this.props.onSetUsers(data.items, data.totalCount, page);
         });
     };
 
     render() {
+        debugger;
         return <>{
             this.props.isFetching
                 ? <Preloader/>
@@ -36,7 +29,9 @@ class UsersContainer extends React.Component {
                          users={this.props.users}
                          onFollow={this.props.onFollow}
                          onUnfollow={this.props.onUnfollow}
-                         getUsers={this.getUsers}/>
+                         getUsers={this.getUsers}
+                         toggleFollowing={this.props.onToggleFollowing}
+                         following={this.props.following}/>
         }</>
     }
 }
@@ -48,7 +43,8 @@ const mapStateToProps = (state) => {
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
         pageSize: state.usersPage.pageSize,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        following: state.usersPage.following
     }
 };
 

@@ -12,8 +12,8 @@ const User = (props) => {
             <span>{props.country}</span>
             <div>
                 {props.followed
-                    ? <button onClick={() => props.unfollow(props.id)} >UNFOLLOW</button>
-                    : <button onClick={() => props.follow(props.id)} >FOLLOW</button>}
+                    ? <button onClick={() => props.unfollow(props.id)} disabled={props.inFollowing}>UNFOLLOW</button>
+                    : <button onClick={() => props.follow(props.id)} disabled={props.inFollowing}>FOLLOW</button>}
             </div>
         </div>
     )

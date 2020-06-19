@@ -1,7 +1,8 @@
 {
-  "apiUrl": "https://social-network.samuraijs.com/api/1.0",
-  "apiUsersEndpoint": "/users",
-  "apiProfileEndpoint": "/profile",
-  "apiAuthMeEndpoint": "/auth/me",
-  "api-key": "1b44dd06-2645-4fda-bc7a-6c8f3e5f9b32"
+  "apiUrl": "https://social-network.samuraijs.com/api/1.0/",
+  "apiUsersEndpoint": "users",
+  "apiProfileEndpoint": "profile",
+  "apiAuthMeEndpoint": "auth/me",
+  "apiFollowEndpoint": "follow",
+  "apiKey": "1b44dd06-2645-4fda-bc7a-6c8f3e5f9b32"
 }

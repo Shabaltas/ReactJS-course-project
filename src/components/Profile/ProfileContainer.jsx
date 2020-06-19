@@ -1,18 +1,17 @@
 import React from "react";
 import actionCreator from "../../redux/actionCreator";
 import {connect} from "react-redux";
-import * as axios from "axios";
 import Profile from "./Profile";
 import {withRouter} from "react-router-dom";
-import configs from "../../configs";
+import api from "../../api/api";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userId = this.props.match.params.userId;
         this.props.onToggleIsFetching(true);
-        axios.get(`${configs.apiUrl+configs.apiProfileEndpoint}/${userId ? userId : 2}`).then(res => {
+        api.getProfileInfo(userId).then(data => {
             this.props.onToggleIsFetching(false);
-            this.props.onSetProfile(res.data);
+            this.props.onSetProfile(data);
         });
     }
 

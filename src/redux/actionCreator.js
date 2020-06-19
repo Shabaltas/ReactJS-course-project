@@ -36,7 +36,12 @@ const actionCreator = {
     onSetAuthUser: (id, email, login) => ({
         type: actionTypes.SET_AUTH_USER,
         id, email, login
-    })
+    }),
+    onToggleFollowing: (isFetching, userId) => ({
+        type: actionTypes.TOGGLE_FOLLOWING,
+        isFetching,
+        userId
+    }),
 };
 
 export default actionCreator;
