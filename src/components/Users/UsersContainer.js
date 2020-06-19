@@ -4,6 +4,7 @@ import actionCreator from "../../redux/actionCreator";
 import Users from './Users';
 import * as axios from "axios";
 import Preloader from "../Preloader/Preloader";
+import configs from "../../configs";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -12,7 +13,14 @@ class UsersContainer extends React.Component {
 
     getUsers = (page) => {
         this.props.onToggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(res => {
+        axios.get(`${configs.apiUrl+configs.apiUsersEndpoint}?page=${page}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true,
+                headers: {
+                "api-key": "1b44dd06-2645-4fda-bc7a-6c8f3e5f9b32"
+                }
+            })
+            .then(res => {
             this.props.onToggleIsFetching(false);
             this.props.onSetUsers(res.data.items, res.data.totalCount, page);
         });

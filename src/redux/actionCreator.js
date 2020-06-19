@@ -32,6 +32,10 @@ const actionCreator = {
     onSetProfile: (profile) => ({
         type: actionTypes.SET_PROFILE,
         profile
+    }),
+    onSetAuthUser: (id, email, login) => ({
+        type: actionTypes.SET_AUTH_USER,
+        id, email, login
     })
 };
 
