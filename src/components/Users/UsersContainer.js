@@ -1,25 +1,19 @@
 import React from "react";
 import {connect} from "react-redux";
-import actionCreator from "../../redux/actionCreator";
+import {thunkCreator} from "../../redux/actionCreator";
 import Users from './Users';
 import Preloader from "../Preloader/Preloader";
-import api from "../../api/api";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.getUsers(this.props.currentPage);
+        this.loadUsers(this.props.currentPage);
     };
 
-    getUsers = (page) => {
-        this.props.onToggleIsFetching(true);
-        api.getUsers(page, this.props.pageSize).then(data => {
-            this.props.onToggleIsFetching(false);
-            this.props.onSetUsers(data.items, data.totalCount, page);
-        });
+    loadUsers = (page) => {
+        this.props.getUsers(page, this.props.pageSize);
     };
 
     render() {
-        debugger;
         return <>{
             this.props.isFetching
                 ? <Preloader/>
@@ -29,9 +23,9 @@ class UsersContainer extends React.Component {
                          users={this.props.users}
                          onFollow={this.props.onFollow}
                          onUnfollow={this.props.onUnfollow}
-                         getUsers={this.getUsers}
-                         toggleFollowing={this.props.onToggleFollowing}
-                         following={this.props.following}/>
+                         getUsers={this.loadUsers}
+                         following={this.props.following}
+                         isAuth={this.props.isAuth}/>
         }</>
     }
 }
@@ -44,8 +38,13 @@ const mapStateToProps = (state) => {
         currentPage: state.usersPage.currentPage,
         pageSize: state.usersPage.pageSize,
         isFetching: state.usersPage.isFetching,
-        following: state.usersPage.following
+        following: state.usersPage.following,
+        isAuth: state.auth.isAuth
     }
 };
 
-export default connect(mapStateToProps, actionCreator)(UsersContainer);
+export default connect(mapStateToProps, {
+    onFollow: thunkCreator.followUser,
+    onUnfollow: thunkCreator.unfollowUser,
+    getUsers: thunkCreator.getUsers
+})(UsersContainer);

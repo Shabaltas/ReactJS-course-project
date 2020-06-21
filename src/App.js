@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import './App.css';
 import './CustomApp.css';
-import Header from "./components/Header/Header";
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
@@ -11,6 +10,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/login/Login";
 
 const App = () => {
     return (
@@ -26,6 +26,7 @@ const App = () => {
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>
                     <Route path='/users' component={UsersContainer}/>
+                    <Route path='/login' component={Login}/>
                     <Route path="/" exact render={() => <ProfileContainer/>}
                     />
                 </div>

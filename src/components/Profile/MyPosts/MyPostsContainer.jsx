@@ -1,5 +1,5 @@
 import React from "react";
-import actionCreator from "../../../redux/actionCreator";
+import ac from "../../../redux/actionCreator";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 
@@ -9,4 +9,7 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, actionCreator)(MyPosts);
+export default connect(mapStateToProps, {
+    onChangePostInput: ac.onChangePostInput,
+    onAddPost: ac.onAddPost
+})(MyPosts);

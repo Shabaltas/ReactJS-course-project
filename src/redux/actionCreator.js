@@ -1,16 +1,17 @@
-import {actionTypes} from "./actionTypes";
+import actionTypes from "./actionTypes";
+import api from "../api/api";
 
 const actionCreator = {
-    onAddMsg: () => ({ type: actionTypes.ADD_MSG }),
+    onAddMsg: () => ({type: actionTypes.ADD_MSG}),
     onAddPost: () => ({type: actionTypes.ADD_POST}),
     onChangePostInput: (newText) => ({
-            type: actionTypes.UPDATE_NEW_POST_TXT,
-            newText
-        }),
+        type: actionTypes.UPDATE_NEW_POST_TXT,
+        newText
+    }),
     onChangeMsgInput: (newText) => ({
-            type: actionTypes.UPDATE_NEW_MSG_TXT,
-            newText
-        }),
+        type: actionTypes.UPDATE_NEW_MSG_TXT,
+        newText
+    }),
     onFollow: (userId) => ({
         type: actionTypes.FOLLOW,
         userId
@@ -42,6 +43,49 @@ const actionCreator = {
         isFetching,
         userId
     }),
+    thunkCreator: {
+        getUsers: (page, pageSize) => (dispatch) => {
+            dispatch(actionCreator.onToggleIsFetching(true));
+            api.getUsers(page, pageSize).then(users => {
+                dispatch(actionCreator.onToggleIsFetching(false));
+                dispatch(actionCreator.onSetUsers(users.items, users.totalCount, page));
+            });
+        },
+        followUser: (userId) => (dispatch) => {
+            dispatch(actionCreator.onToggleFollowing(true, userId));
+            api.followUser(userId)
+                .then(data => {
+                    dispatch(actionCreator.onToggleFollowing(false, userId));
+                    if (!data.resultCode)
+                        dispatch(actionCreator.onFollow(userId));
+                });
+        },
+        unfollowUser: (userId) => (dispatch) => {
+            dispatch(actionCreator.onToggleFollowing(true, userId));
+            api.unfollowUser(userId)
+                .then(data => {
+                    dispatch(actionCreator.onToggleFollowing(false, userId));
+                    if (!data.resultCode)
+                        dispatch(actionCreator.onUnfollow(userId));
+                });
+        },
+        setAuthUser: () => (dispatch) => {
+            api.authMe().then(data => {
+                if (!data.resultCode) {
+                    let {id, login, email} = data.data;
+                    dispatch(actionCreator.onSetAuthUser(id, email, login));
+                }
+            });
+        },
+        getProfileInfo: (userId) => (dispatch) => {
+            dispatch(actionCreator.onToggleIsFetching(true));
+            api.getProfileInfo(userId).then(profileInfo => {
+                dispatch(actionCreator.onToggleIsFetching(false));
+                dispatch(actionCreator.onSetProfile(profileInfo));
+            });
+        }
+    }
 };
 
 export default actionCreator;
+export const thunkCreator = actionCreator.thunkCreator;
