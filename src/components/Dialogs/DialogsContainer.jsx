@@ -2,15 +2,19 @@ import React from 'react';
 import ac from "../../redux/actionCreator";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import withAuthRedirect from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 const mapStateToProps = (state) => {
     return {
         data: state.dialogsPage,
-        isAuth: state.auth.isAuth
     }
 };
 
-export default connect(mapStateToProps, {
-    onChangeMsgInput: ac.onChangeMsgInput,
-    onAddMsg: ac.onAddMsg
-})(Dialogs);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        onChangeMsgInput: ac.onChangeMsgInput,
+        onAddMsg: ac.onAddMsg
+    })
+)(Dialogs);

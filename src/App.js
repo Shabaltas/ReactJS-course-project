@@ -11,29 +11,44 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/login/Login";
+import {connect} from "react-redux";
+import {thunkCreator} from "./redux/actionCreator";
 
-const App = () => {
-    return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <HeaderContainer/>
-                <NavbarContainer/>
-                <div className='app-wrapper__content'>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}
-                    />
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/settings' component={Settings}/>
-                    <Route path='/users' component={UsersContainer}/>
-                    <Route path='/login' component={Login}/>
-                    <Route path="/" exact render={() => <ProfileContainer/>}
-                    />
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.authMe();
+    }
+
+    authMe = () => {
+        this.props.setAuthMe();
+    };
+
+    render() {
+        return (
+            <BrowserRouter>
+                <div className='app-wrapper'>
+                    <HeaderContainer/>
+                    <NavbarContainer/>
+                    <div className='app-wrapper__content'>
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}
+                        />
+                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                        <Route path='/news' component={News}/>
+                        <Route path='/music' component={Music}/>
+                        <Route path='/settings' component={Settings}/>
+                        <Route path='/users' component={UsersContainer}/>
+                        <Route path='/login' component={Login}/>
+                        <Route path="/" exact render={() => <ProfileContainer/>}
+                        />
+                    </div>
                 </div>
-            </div>
-        </BrowserRouter>
+            </BrowserRouter>
+        )
+    }
+}
 
-    )
-};
 
-export default App;
+export default connect(undefined, {setAuthMe: thunkCreator.setAuthUser})(App);
+
+//export default App;
