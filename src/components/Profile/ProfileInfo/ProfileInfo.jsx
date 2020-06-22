@@ -2,6 +2,7 @@ import React from "react";
 import contentTop from "../../../resources/contentTop.jpg";
 import replace from "../../../resources/personAva.png";
 import s from "./ProfileInfo.module.css";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     return (
@@ -13,6 +14,7 @@ const ProfileInfo = (props) => {
                 <img className={s.ava} src={props.photos.large ? props.photos.large : replace}/>
                 <div style={{padding: "10px"}}>
                     <h3>{props.fullName}</h3>
+                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                     <h5>About me:{` ${props.aboutMe}`}</h5>
                     {Object.entries(props.contacts).map(e => e[1] ? <div>{e[0]}: {e[1]}</div> : <></>)}
                 </div>

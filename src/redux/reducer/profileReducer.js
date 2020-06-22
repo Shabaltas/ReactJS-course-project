@@ -38,6 +38,13 @@ function setProfile(state, profile) {
     };
 }
 
+function setStatus(state, status) {
+    return {
+        ...state,
+        status
+    };
+}
+
 function toggleIsFetching(state, isFetching) {
     return {
         ...state,
@@ -55,6 +62,8 @@ const profileReducer = (state = initialState, action) => {
             return setProfile(state, action.profile);
         case actionTypes.TOGGLE_IS_FETCHING:
             return toggleIsFetching(state, action.isFetching);
+        case actionTypes.UPDATE_PROFILE_STATUS:
+            return setStatus(state, action.status);
         default:
             return state;
     }

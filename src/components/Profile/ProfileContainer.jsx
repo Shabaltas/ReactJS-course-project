@@ -13,7 +13,6 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
-        debugger;
         return <Profile {...this.props}/>
     }
 }
@@ -25,5 +24,8 @@ let mapStateToProps = (state) => ({
 export default compose(
     withRouter,
     withAuthRedirect,
-    connect(mapStateToProps, {getProfileInfo: thunkCreator.getProfileInfo}),
+    connect(mapStateToProps, {
+        getProfileInfo: thunkCreator.getProfileInfo,
+        updateProfileStatus: thunkCreator.updateProfileStatus
+    }),
 )(ProfileContainer);

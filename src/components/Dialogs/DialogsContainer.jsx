@@ -5,11 +5,7 @@ import {connect} from "react-redux";
 import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.dialogsPage,
-    }
-};
+const mapStateToProps = (state) => ({ data: state.dialogsPage });
 
 export default compose(
     withAuthRedirect,

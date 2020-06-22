@@ -6,7 +6,6 @@ const mapStateToProps = (state) => {
         data: state.navbar
     }
 };
-const mapDispatchToProps = (dispatch) => {
-    return {}
-};
+const mapDispatchToProps = (dispatch) => ({});
+
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

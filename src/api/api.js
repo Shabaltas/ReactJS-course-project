@@ -28,6 +28,15 @@ const api = {
     getProfileInfo(userId){
         return apiInstance.get(`${configs.apiProfileEndpoint}/${userId ? userId : 2}`)
             .then(res => res.data);
+    },
+    getProfileStatus(userId) {
+        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId ? userId : 2}`)
+            .then(res => res.data);
+    },
+    //TODO updates MY STATUS
+    updateProfileStatus(status) {
+        return apiInstance.put(`${configs.apiProfileEndpoint}/status`, {status})
+            .then(res => res.data);
     }
 };
 

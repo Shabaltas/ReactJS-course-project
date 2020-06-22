@@ -17,12 +17,8 @@ import {thunkCreator} from "./redux/actionCreator";
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.authMe();
-    }
-
-    authMe = () => {
         this.props.setAuthMe();
-    };
+    }
 
     render() {
         return (
@@ -31,8 +27,7 @@ class App extends React.Component {
                     <HeaderContainer/>
                     <NavbarContainer/>
                     <div className='app-wrapper__content'>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}
-                        />
+                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                         <Route path='/news' component={News}/>
                         <Route path='/music' component={Music}/>
@@ -48,7 +43,8 @@ class App extends React.Component {
     }
 }
 
+let mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+});
 
-export default connect(undefined, {setAuthMe: thunkCreator.setAuthUser})(App);
-
-//export default App;
+export default connect(mapStateToProps, {setAuthMe: thunkCreator.setAuthUser})(App);

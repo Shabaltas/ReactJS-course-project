@@ -38,6 +38,10 @@ const actionCreator = {
         type: actionTypes.SET_AUTH_USER,
         id, email, login
     }),
+    onUpdateStatus: (newStatus) => ({
+        type: actionTypes.UPDATE_PROFILE_STATUS,
+        status: newStatus
+    }),
     onToggleFollowing: (isFetching, userId) => ({
         type: actionTypes.TOGGLE_FOLLOWING,
         isFetching,
@@ -80,8 +84,16 @@ const actionCreator = {
         getProfileInfo: (userId) => (dispatch) => {
             dispatch(actionCreator.onToggleIsFetching(true));
             api.getProfileInfo(userId).then(profileInfo => {
-                dispatch(actionCreator.onToggleIsFetching(false));
-                dispatch(actionCreator.onSetProfile(profileInfo));
+                api.getProfileStatus(userId).then(status => {
+                    dispatch(actionCreator.onToggleIsFetching(false));
+                    dispatch(actionCreator.onSetProfile({...profileInfo, status}));
+                })
+            });
+        },
+        updateProfileStatus: (newStatus) => (dispatch) => {
+            api.updateProfileStatus(newStatus).then(data => {
+                if (!data.resultCode)
+                    dispatch(actionCreator.onUpdateStatus(newStatus));
             });
         }
     }
