@@ -30,9 +30,10 @@ const actionCreator = {
         type: actionTypes.TOGGLE_IS_FETCHING,
         isFetching
     }),
-    onSetProfile: (profile) => ({
+    onSetProfile: (profile, status) => ({
         type: actionTypes.SET_PROFILE,
-        profile
+        profile,
+        status
     }),
     onSetAuthUser: (id, email, login) => ({
         type: actionTypes.SET_AUTH_USER,
@@ -83,10 +84,10 @@ const actionCreator = {
         },
         getProfileInfo: (userId) => (dispatch) => {
             dispatch(actionCreator.onToggleIsFetching(true));
-            api.getProfileInfo(userId).then(profileInfo => {
+            api.getProfileInfo(userId).then(profile => {
                 api.getProfileStatus(userId).then(status => {
                     dispatch(actionCreator.onToggleIsFetching(false));
-                    dispatch(actionCreator.onSetProfile({...profileInfo, status}));
+                    dispatch(actionCreator.onSetProfile(profile, status));
                 })
             });
         },

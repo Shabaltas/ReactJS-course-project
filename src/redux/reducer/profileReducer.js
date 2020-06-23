@@ -9,6 +9,7 @@ const initialState = {
     ],
     changeablePostMsg: '',
     profile: null,
+    status: '',
     isFetching: false
 };
 
@@ -31,10 +32,11 @@ function updateNewPostTxt(state, newTxt) {
     };
 }
 
-function setProfile(state, profile) {
+function setProfile(state, profile, status) {
     return {
         ...state,
-        profile
+        profile,
+        status
     };
 }
 
@@ -59,7 +61,7 @@ const profileReducer = (state = initialState, action) => {
         case actionTypes.UPDATE_NEW_POST_TXT:
             return updateNewPostTxt(state, action.newText);
         case actionTypes.SET_PROFILE:
-            return setProfile(state, action.profile);
+            return setProfile(state, action.profile, action.status);
         case actionTypes.TOGGLE_IS_FETCHING:
             return toggleIsFetching(state, action.isFetching);
         case actionTypes.UPDATE_PROFILE_STATUS:

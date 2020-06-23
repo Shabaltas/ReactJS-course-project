@@ -2,7 +2,7 @@ import React from "react";
 
 class ProfileStatus extends React.Component {
     state = {
-        status: this.props.status,
+        inputStatus: this.props.status,
         editMode: false
     };
 
@@ -11,21 +11,27 @@ class ProfileStatus extends React.Component {
     };
 
     changeStatus = (e) => {
-        this.setState({ status: e.target.value})
+        this.setState({ inputStatus: e.target.value})
     };
+
+    /*how to fix when need to change local state when global state has changed
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.status !== this.props.status)
+            this.setState({ inputStatus: this.props.status})
+    }*/
 
     //TODO can update status only for the current authorized user
     render() {
         return this.state.editMode
             ? <div>
-                <input onChange={this.changeStatus} value={this.state.status} autoFocus={true}
+                <input onChange={this.changeStatus} value={this.state.inputStatus} autoFocus={true}
                        onBlur={() => {
-                           this.props.updateStatus(this.state.status);
                            this.toggleEditMode(false);
-                       }}/>
+                           this.props.updateStatus(this.state.inputStatus);
+                       }} maxLength={300}/>
             </div>
             : <div>
-                <span onDoubleClick={() => this.toggleEditMode(true)}>{this.state.status}</span>
+                <span onDoubleClick={() => this.toggleEditMode(true)}>{this.props.status || "___________"}</span>
             </div>
     }
 }

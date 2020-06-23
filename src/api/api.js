@@ -26,11 +26,11 @@ const api = {
             .then(res => res.data);
     },
     getProfileInfo(userId){
-        return apiInstance.get(`${configs.apiProfileEndpoint}/${userId ? userId : 2}`)
+        return apiInstance.get(`${configs.apiProfileEndpoint}/${userId ? userId : 8854}`)
             .then(res => res.data);
     },
     getProfileStatus(userId) {
-        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId ? userId : 2}`)
+        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId ? userId : 8854}`)
             .then(res => res.data);
     },
     //TODO updates MY STATUS
