@@ -96,6 +96,23 @@ const actionCreator = {
                 if (!data.resultCode)
                     dispatch(actionCreator.onUpdateStatus(newStatus));
             });
+        },
+        login: (email, password, rememberMe) => (dispatch) => {
+            api.login(email, password, rememberMe).then(data => {
+                if (!data.resultCode) {
+                    api.defaultId = data.data.userId;
+                    dispatch(thunkCreator.setAuthUser());
+                }
+            })
+        },
+        logout: () => (dispatch) => {
+            debugger
+            api.logout().then(data => {
+                if (!data.resultCode) {
+                    api.defaultId = 2;
+                    dispatch(thunkCreator.setAuthUser());
+                }
+            })
         }
     }
 };

@@ -10,6 +10,7 @@ const apiInstance = axios.create({
 });
 
 const api = {
+    defaultId: 2,
     authMe() {
         return apiInstance.get(configs.apiAuthMeEndpoint).then(resp => resp.data);
     },
@@ -26,17 +27,25 @@ const api = {
             .then(res => res.data);
     },
     getProfileInfo(userId){
-        return apiInstance.get(`${configs.apiProfileEndpoint}/${userId ? userId : 8854}`)
+        return apiInstance.get(`${configs.apiProfileEndpoint}/${userId ? userId : this.defaultId}`)
             .then(res => res.data);
     },
     getProfileStatus(userId) {
-        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId ? userId : 8854}`)
+        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId ? userId : this.defaultId}`)
             .then(res => res.data);
     },
     //TODO updates MY STATUS
     updateProfileStatus(status) {
         return apiInstance.put(`${configs.apiProfileEndpoint}/status`, {status})
             .then(res => res.data);
+    },
+    login(email, password, rememberMe = false, captcha = true) {
+        return apiInstance.post(`${configs.apiLoginEndpoint}`, {email, password, rememberMe, captcha})
+            .then(res => res.data)
+    },
+    logout() {
+        return apiInstance.post(`${configs.apiLogoutEndpoint}`)
+            .then(res => res.data)
     }
 };
 

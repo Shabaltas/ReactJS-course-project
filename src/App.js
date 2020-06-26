@@ -13,6 +13,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/login/Login";
 import {connect} from "react-redux";
 import {thunkCreator} from "./redux/actionCreator";
+import LoginContainer from "./components/login/LoginContainer";
 
 class App extends React.Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class App extends React.Component {
                         <Route path='/music' component={Music}/>
                         <Route path='/settings' component={Settings}/>
                         <Route path='/users' component={UsersContainer}/>
-                        <Route path='/login' component={Login}/>
+                        <Route path='/login' component={LoginContainer}/>
                         <Route path="/" exact render={() => <ProfileContainer/>}
                         />
                     </div>

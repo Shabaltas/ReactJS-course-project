@@ -4,5 +4,7 @@
   "apiProfileEndpoint": "profile",
   "apiAuthMeEndpoint": "auth/me",
   "apiFollowEndpoint": "follow",
+  "apiLoginEndpoint": "auth/login",
+  "apiLogoutEndpoint": "auth/logout",
   "apiKey": "1b44dd06-2645-4fda-bc7a-6c8f3e5f9b32"
 }
