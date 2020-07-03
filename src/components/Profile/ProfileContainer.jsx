@@ -3,28 +3,34 @@ import {thunkCreator} from "../../redux/actionCreator";
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {withRouter} from "react-router-dom";
-import withAuthRedirect from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
+    userId;
     componentDidMount() {
-        let userId = this.props.match.params.userId;
-        this.props.getProfileInfo(userId);
-    }
+        this.userId = this.props.match.params.userId || this.props.authorizedUserId;
+        if (this.userId)
+            this.props.getProfileInfo(this.userId);
+        else
+            this.props.history.push('/login');
+    };
 
     render() {
-        return <Profile {...this.props}/>
-    }
+        debugger;
+        return <Profile {...this.props} authedUser={ this.userId == this.props.authorizedUserId}/>
+    };
 }
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    posts: state.profilePage.posts,
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 });
 
 export default compose(
     withRouter,
-    withAuthRedirect,
     connect(mapStateToProps, {
         getProfileInfo: thunkCreator.getProfileInfo,
         updateProfileStatus: thunkCreator.updateProfileStatus

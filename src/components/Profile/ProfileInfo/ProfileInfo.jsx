@@ -14,7 +14,11 @@ const ProfileInfo = (props) => {
                 <img className={s.ava} src={props.photos.large ? props.photos.large : replace}/>
                 <div style={{padding: "10px"}}>
                     <h3>{props.fullName}</h3>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    {
+                        props.isAuthedUser
+                            ? <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                            : <div><span>{props.status || "___________"}</span></div>
+                    }
                     <h5>About me:{` ${props.aboutMe}`}</h5>
                     {Object.entries(props.contacts).map(e => e[1] ? <div>{e[0]}: {e[1]}</div> : <></>)}
                 </div>
