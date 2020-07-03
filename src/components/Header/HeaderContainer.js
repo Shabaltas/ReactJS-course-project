@@ -7,7 +7,6 @@ import {withRouter} from "react-router-dom";
 class HeaderContainer extends React.Component {
     logout = () => {
         this.props.logout();
-        this.props.history.push('/users');
     };
 
     render() {

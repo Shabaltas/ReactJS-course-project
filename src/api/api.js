@@ -10,7 +10,6 @@ const apiInstance = axios.create({
 });
 
 const api = {
-    defaultId: 2,
     authMe() {
         return apiInstance.get(configs.apiAuthMeEndpoint).then(resp => resp.data);
     },
@@ -27,14 +26,13 @@ const api = {
             .then(res => res.data);
     },
     getProfileInfo(userId){
-        return apiInstance.get(`${configs.apiProfileEndpoint}/${userId ? userId : this.defaultId}`)
+        return apiInstance.get(`${configs.apiProfileEndpoint}/${userId}`)
             .then(res => res.data);
     },
     getProfileStatus(userId) {
-        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId ? userId : this.defaultId}`)
+        return apiInstance.get(`${configs.apiProfileEndpoint}/status/${userId}`)
             .then(res => res.data);
     },
-    //TODO updates MY STATUS
     updateProfileStatus(status) {
         return apiInstance.put(`${configs.apiProfileEndpoint}/status`, {status})
             .then(res => res.data);

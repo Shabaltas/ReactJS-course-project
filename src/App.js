@@ -10,20 +10,20 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {thunkCreator} from "./redux/actionCreator";
 import LoginContainer from "./components/Login/LoginContainer";
+import Preloader from "./components/Preloader/Preloader";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.props.setAuthMe();
+        this.props.initialize();
     }
 
     render() {
-        return (
-            <BrowserRouter>
+        return this.props.initialized
+            ? <BrowserRouter>
                 <div className='app-wrapper'>
                     <HeaderContainer/>
                     <NavbarContainer/>
@@ -40,12 +40,13 @@ class App extends React.Component {
                     </div>
                 </div>
             </BrowserRouter>
-        )
+            : <Preloader/>
     }
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    initialized: state.app.initialized
 });
 
-export default connect(mapStateToProps, {setAuthMe: thunkCreator.setAuthUser})(App);
+export default connect(mapStateToProps, {initialize: thunkCreator.initializeApp})(App);

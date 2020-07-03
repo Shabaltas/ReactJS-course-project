@@ -1,5 +1,6 @@
 import actionTypes from "./actionTypes";
 import api from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const actionCreator = {
     onAddMsg: (msg) => ({
@@ -33,9 +34,9 @@ const actionCreator = {
         profile,
         status
     }),
-    onSetAuthUser: (id, email, login) => ({
+    onSetAuthUser: (id, email, login, isAuth) => ({
         type: actionTypes.SET_AUTH_USER,
-        id, email, login
+        id, email, login, isAuth
     }),
     onUpdateStatus: (newStatus) => ({
         type: actionTypes.UPDATE_PROFILE_STATUS,
@@ -46,6 +47,7 @@ const actionCreator = {
         isFetching,
         userId
     }),
+    onInitialized: () => ({type: actionTypes.INITIALIZED_SUCCESSFULLY}),
     thunkCreator: {
         getUsers: (page, pageSize) => (dispatch) => {
             dispatch(actionCreator.onToggleIsFetching(true));
@@ -73,10 +75,10 @@ const actionCreator = {
                 });
         },
         setAuthUser: () => (dispatch) => {
-            api.authMe().then(data => {
+            return api.authMe().then(data => {
                 if (!data.resultCode) {
                     let {id, login, email} = data.data;
-                    dispatch(actionCreator.onSetAuthUser(id, email, login));
+                    dispatch(actionCreator.onSetAuthUser(id, email, login, true));
                 }
             });
         },
@@ -100,17 +102,21 @@ const actionCreator = {
                 if (!data.resultCode) {
                     api.defaultId = data.data.userId;
                     dispatch(thunkCreator.setAuthUser());
+                } else {
+                    dispatch(stopSubmit('login', {_error: data.messages.length > 0 ? data.messages[0] : "Some error occurred"}));
                 }
             })
         },
         logout: () => (dispatch) => {
-            debugger
             api.logout().then(data => {
                 if (!data.resultCode) {
-                    api.defaultId = 2;
-                    dispatch(thunkCreator.setAuthUser());
+                    dispatch(actionCreator.onSetAuthUser(2, null, null, false));
                 }
             })
+        },
+        initializeApp: () => (dispatch) => {
+            dispatch(thunkCreator.setAuthUser())
+                .then(() => dispatch(actionCreator.onInitialized()))
         }
     }
 };

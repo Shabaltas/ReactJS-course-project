@@ -7,20 +7,20 @@ const initialState = {
     isAuth: false
 };
 
-function setUsers(state, userId, email, login) {
+function setUsers(state, userId, email, login, isAuth) {
     return {
         ...state,
         userId,
         email,
         login,
-        isAuth: true
+        isAuth
     }
 }
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_AUTH_USER:
-            return setUsers(state, action.id, action.email, action.login);
+            return setUsers(state, action.id, action.email, action.login, action.isAuth);
         default:
             return state;
     }
