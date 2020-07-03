@@ -2,15 +2,13 @@ import actionTypes from "./actionTypes";
 import api from "../api/api";
 
 const actionCreator = {
-    onAddMsg: () => ({type: actionTypes.ADD_MSG}),
-    onAddPost: () => ({type: actionTypes.ADD_POST}),
-    onChangePostInput: (newText) => ({
-        type: actionTypes.UPDATE_NEW_POST_TXT,
-        newText
+    onAddMsg: (msg) => ({
+        type: actionTypes.ADD_MSG,
+        newMsg: msg
     }),
-    onChangeMsgInput: (newText) => ({
-        type: actionTypes.UPDATE_NEW_MSG_TXT,
-        newText
+    onAddPost: (post) => ({
+        type: actionTypes.ADD_POST,
+        newPost: post
     }),
     onFollow: (userId) => ({
         type: actionTypes.FOLLOW,

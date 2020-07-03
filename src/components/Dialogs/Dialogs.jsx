@@ -2,11 +2,21 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
+import {Field, Form, reduxForm} from "redux-form";
+import {required} from "../common/validator/validator";
+import {Textarea} from "../common/formcomponents/Components";
+
+let NewMsgForm = (props) => {
+    return (
+        <Form onSubmit={props.handleSubmit}>
+            <Field component={Textarea} name="newMsg" validate={required} placeholder="Enter new message"/>
+            <div><button className={s.btn}> Send</button></div>
+        </Form>)
+};
+
+NewMsgForm = reduxForm({form: "newMsg"})(NewMsgForm);
 
 const Dialogs = (props) => {
-    const onChangeMsgInput = (e) => {
-        props.onChangeMsgInput(e.target.value);
-    };
     return (
         <div className={s.dialogs}>
             <div className={s.dialogs__items}>
@@ -16,8 +26,7 @@ const Dialogs = (props) => {
             <div className={s.dialogs__messages}>
                 {props.data.messages.map(msg => <Message key={msg.id} text={msg.text}/>)}
             </div>
-            <textarea value={props.data.changeableMsgTxt} onChange={onChangeMsgInput}/>
-            <button onClick={props.onAddMsg} className={s.btn}> Send</button>
+            <NewMsgForm onSubmit={(values) => props.onAddMsg(values.newMsg)}/>
         </div>
     )
 };

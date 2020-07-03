@@ -16,30 +16,20 @@ const initialState = {
     changeableMsgTxt: ''
 };
 
-function addMsg(state) {
+function addMsg(state, newMsg) {
     return {
         ...state,
         messages: [...state.messages, {
             id: 5,
-            text: state.changeableMsgTxt
-        }],
-        changeableMsgTxt: ''
-    };
-}
-
-function updateNewMsgTxt(state, newTxt) {
-    return {
-        ...state,
-        changeableMsgTxt: newTxt
+            text: newMsg
+        }]
     };
 }
 
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_MSG:
-            return addMsg(state);
-        case actionTypes.UPDATE_NEW_MSG_TXT:
-            return updateNewMsgTxt(state, action.newText);
+            return addMsg(state, action.newMsg);
         default:
             return state;
     }

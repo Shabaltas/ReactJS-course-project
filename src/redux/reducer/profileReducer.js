@@ -7,28 +7,19 @@ const initialState = {
         {id: 3, msg: "dead", likes: 2},
         {id: 4, msg: "...", likes: 1}
     ],
-    changeablePostMsg: '',
     profile: null,
     status: '',
     isFetching: false
 };
 
-function addPost(state) {
+function addPost(state, newPost) {
     return {
         ...state,
         posts: [...state.posts, {
             id: 5,
-            msg: state.changeablePostMsg,
+            msg: newPost,
             likes: 0
-        }],
-        changeablePostMsg: ''
-    };
-}
-
-function updateNewPostTxt(state, newTxt) {
-    return {
-        ...state,
-        changeablePostMsg: newTxt
+        }]
     };
 }
 
@@ -57,9 +48,7 @@ function toggleIsFetching(state, isFetching) {
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_POST:
-            return addPost(state);
-        case actionTypes.UPDATE_NEW_POST_TXT:
-            return updateNewPostTxt(state, action.newText);
+            return addPost(state, action.newPost);
         case actionTypes.SET_PROFILE:
             return setProfile(state, action.profile, action.status);
         case actionTypes.TOGGLE_IS_FETCHING:

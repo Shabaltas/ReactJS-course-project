@@ -1,0 +1,15 @@
+.text {
+    border: solid 1px black;
+}
+
+.error_div {
+    border: solid red 2px;
+}
+
+.error_child {
+    border: inherit;
+}
+
+.error_msg {
+    color: red;
+}
