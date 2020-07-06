@@ -1,7 +1,7 @@
 import actionTypes from "../actionTypes";
 
 const initialState = {
-    users: [ ],
+    users: [],
     currentPage: 1,
     totalCount: 0,
     pageSize: 10,

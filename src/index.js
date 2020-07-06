@@ -5,16 +5,12 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {Provider} from "react-redux";
 
-export const renderApp = (store) => {
-    window.store = store;
-    ReactDOM.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
-};
-store.subscribe(renderApp.bind(undefined, store));
-renderApp(store);
+window.store = store;
+ReactDOM.render(
+    <React.StrictMode>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
+);

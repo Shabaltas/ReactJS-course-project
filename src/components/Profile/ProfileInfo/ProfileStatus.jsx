@@ -20,7 +20,6 @@ class ProfileStatus extends React.Component {
             this.setState({ inputStatus: this.props.status})
     }*/
 
-    //TODO can update status only for the current authorized user
     render() {
         return this.state.editMode
             ? <div>

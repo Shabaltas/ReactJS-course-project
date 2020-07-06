@@ -1,9 +1,11 @@
 import {connect} from "react-redux";
 import Navbar from "./Navbar";
+import {getFriends} from "../../selectors/stateSelector";
 
 const mapStateToProps = (state) => {
+    console.log("MapStateToProps NAVBAR");
     return {
-        data: state.navbar
+        friends: getFriends(state)
     }
 };
 const mapDispatchToProps = (dispatch) => ({});

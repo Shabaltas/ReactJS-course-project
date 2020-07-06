@@ -10,7 +10,7 @@ const maxLength = maxLengthValidator(postMaxLength);
 let NewPostForm = (props) => {
     return (
         <Form onSubmit={props.handleSubmit}>
-            <Field placeholder={"New post"} component={Textarea} name="newPostText" validate={[required, maxLength]} maxlength={postMaxLength}/>
+            <Field placeholder={"New post"} component={Textarea} name="newPostText" validate={[required, maxLength]} maxLength={postMaxLength}/>
             <div><button className={s.btnNewPost} type="submit">New post</button></div>
         </Form>
     )

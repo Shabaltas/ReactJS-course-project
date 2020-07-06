@@ -3,6 +3,12 @@ import {connect} from "react-redux";
 import {thunkCreator} from "../../redux/actionCreator";
 import Users from './Users';
 import Preloader from "../Preloader/Preloader";
+import {
+    getAuthorizedId, getCurrentPage,
+    getFollowingUsers, getIsAuth,
+    getIsFetching, getPageSize,
+    getUsers, getUsersTotalCount
+} from "../../selectors/stateSelector";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -14,32 +20,36 @@ class UsersContainer extends React.Component {
     };
 
     render() {
-        return <>{
-            this.props.isFetching
-                ? <Preloader/>
-                : <Users totalCount={this.props.totalCount}
-                         pageSize={this.props.pageSize}
-                         currentPage={this.props.currentPage}
-                         users={this.props.users}
-                         onFollow={this.props.onFollow}
-                         onUnfollow={this.props.onUnfollow}
-                         getUsers={this.loadUsers}
-                         following={this.props.following}
-                         isAuth={this.props.isAuth}/>
-        }</>
+        console.log("Render USERS, ", window.store.getState().usersPage);
+        return this.props.isFetching
+            ? <Preloader/>
+            : <Users totalCount={this.props.totalCount}
+                     pageSize={this.props.pageSize}
+                     currentPage={this.props.currentPage}
+                     users={this.props.users}
+                     onFollow={this.props.onFollow}
+                     onUnfollow={this.props.onUnfollow}
+                     getUsers={this.loadUsers}
+                     following={this.props.following}
+                     isAuth={this.props.isAuth}
+                     authorizedId={this.props.authorizedId}
+            />
+
     }
 }
 
 
 const mapStateToProps = (state) => {
+    console.log("MapStateToProps USERS");
     return {
-        users: state.usersPage.users,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        pageSize: state.usersPage.pageSize,
-        isFetching: state.usersPage.isFetching,
-        following: state.usersPage.following,
-        isAuth: state.auth.isAuth
+        users: getUsers(state),
+        totalCount: getUsersTotalCount(state),
+        currentPage: getCurrentPage(state),
+        pageSize: getPageSize(state),
+        isFetching: getIsFetching(state),
+        following: getFollowingUsers(state),
+        authorizedId: getAuthorizedId(state),
+        isAuth: getIsAuth(state)
     }
 };
 

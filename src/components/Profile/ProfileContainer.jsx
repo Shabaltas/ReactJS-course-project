@@ -4,9 +4,11 @@ import {connect} from "react-redux";
 import Profile from "./Profile";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
+import {getAuthorizedId, getIsAuth, getPosts, getProfile, getProfileStatus} from "../../selectors/stateSelector";
 
 class ProfileContainer extends React.Component {
     userId;
+
     componentDidMount() {
         this.userId = this.props.match.params.userId || this.props.authorizedUserId;
         if (this.userId)
@@ -16,18 +18,19 @@ class ProfileContainer extends React.Component {
     };
 
     render() {
-        debugger;
-        return <Profile {...this.props} authedUser={ this.userId == this.props.authorizedUserId}/>
+        return <Profile {...this.props} authedUser={this.userId == this.props.authorizedUserId}/>
     };
 }
 
-let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    posts: state.profilePage.posts,
-    status: state.profilePage.status,
-    authorizedUserId: state.auth.userId,
-    isAuth: state.auth.isAuth
-});
+let mapStateToProps = (state) => {
+    return {
+        profile: getProfile(state),
+        posts: getPosts(state),
+        status: getProfileStatus(state),
+        authorizedUserId: getAuthorizedId(state),
+        isAuth: getIsAuth(state)
+    }
+};
 
 export default compose(
     withRouter,

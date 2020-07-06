@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import Header from "./Header";
 import {thunkCreator} from "../../redux/actionCreator";
 import {withRouter} from "react-router-dom";
+import {getIsAuth, getLogin} from "../../selectors/stateSelector";
 
 class HeaderContainer extends React.Component {
     logout = () => {
@@ -16,8 +17,8 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        login: state.auth.login,
-        isAuth: state.auth.isAuth
+        login: getLogin(state),
+        isAuth: getIsAuth(state)
     }
 };
 

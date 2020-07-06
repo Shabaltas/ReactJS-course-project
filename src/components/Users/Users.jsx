@@ -7,7 +7,6 @@ class Users extends React.Component {
 
     render() {
         let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
-
         return (
             <div>
                 <Pagination
@@ -16,7 +15,7 @@ class Users extends React.Component {
                     onChange={(e, pageNumber) => this.props.getUsers(pageNumber)}
                 />
                 {this.props.users.map(user => <User key={user.id} id={user.id} name={user.name} country={user.country}
-                                                    followed={user.followed} canFollow={this.props.isAuth}
+                                                    followed={user.followed} canFollow={this.props.isAuth && this.props.authorizedId !== user.id}
                                                     photo={user.photos.small ? user.photos.small : ava2}
                                                     follow={this.props.onFollow.bind(undefined, user.id)}
                                                     unfollow={this.props.onUnfollow.bind(undefined, user.id)}
