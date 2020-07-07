@@ -1,38 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 
-class ProfileStatus extends React.Component {
-    state = {
-        inputStatus: this.props.status,
-        editMode: false
+const ProfileStatus = (props) => {
+    let [inputStatus, setInputStatus] = useState(props.status);
+    let [editMode, setEditMode] = useState(false);
+
+    const toggleEditMode = (isEditing) => {
+        setEditMode(isEditing);
     };
 
-    toggleEditMode = (isEditing) => {
-        this.setState({ editMode: isEditing })
-    };
-
-    changeStatus = (e) => {
-        this.setState({ inputStatus: e.target.value})
+    const changeStatus = (e) => {
+        setInputStatus(e.target.value);
     };
 
     /*how to fix when need to change local state when global state has changed
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.status !== this.props.status)
-            this.setState({ inputStatus: this.props.status})
-    }*/
+    useEffect(() => {
+        setInputStatus(props.status);
+    }, [props.status]);
+     */
 
-    render() {
-        return this.state.editMode
-            ? <div>
-                <input onChange={this.changeStatus} value={this.state.inputStatus} autoFocus={true}
-                       onBlur={() => {
-                           this.toggleEditMode(false);
-                           this.props.updateStatus(this.state.inputStatus);
-                       }} maxLength={300}/>
-            </div>
-            : <div>
-                <span onDoubleClick={() => this.toggleEditMode(true)}>{this.props.status || "___________"}</span>
-            </div>
-    }
+    return editMode
+        ? <div>
+            <input onChange={changeStatus} value={inputStatus} autoFocus={true}
+                   onBlur={() => {
+                       toggleEditMode(false);
+                       props.updateStatus(inputStatus);
+                   }} maxLength={300}/>
+        </div>
+        : <div>
+            <span onDoubleClick={() => toggleEditMode(true)}>{props.status || "___________"}</span>
+        </div>
 }
 
 export default ProfileStatus;
