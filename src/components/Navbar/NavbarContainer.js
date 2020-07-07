@@ -3,7 +3,6 @@ import Navbar from "./Navbar";
 import {getFriends} from "../../selectors/stateSelector";
 
 const mapStateToProps = (state) => {
-    console.log("MapStateToProps NAVBAR");
     return {
         friends: getFriends(state)
     }

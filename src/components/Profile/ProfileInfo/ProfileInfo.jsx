@@ -4,7 +4,8 @@ import replace from "../../../resources/personAva.png";
 import s from "./ProfileInfo.module.css";
 import ProfileStatus from "./ProfileStatus";
 
-const ProfileInfo = (props) => {
+// equivalent for class components is shouldComponentUpdate(nextProps, nextState) or extends PoorComponent
+const ProfileInfo = React.memo((props) => {
     return (
         <div>
             <div>
@@ -25,6 +26,6 @@ const ProfileInfo = (props) => {
             </div>
         </div>
     )
-};
+});
 
 export default ProfileInfo;

@@ -5,7 +5,6 @@ import Friends from "./Friends/Friends";
 
 class Navbar extends React.Component {
     render() {
-        console.log("Render NAVBAR");
         return (
             <div>
                 <nav className={s.nav}>

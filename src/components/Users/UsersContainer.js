@@ -20,7 +20,6 @@ class UsersContainer extends React.Component {
     };
 
     render() {
-        console.log("Render USERS, ", window.store.getState().usersPage);
         return this.props.isFetching
             ? <Preloader/>
             : <Users totalCount={this.props.totalCount}
@@ -40,7 +39,6 @@ class UsersContainer extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    console.log("MapStateToProps USERS");
     return {
         users: getUsers(state),
         totalCount: getUsersTotalCount(state),
