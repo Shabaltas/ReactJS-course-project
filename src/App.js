@@ -10,10 +10,11 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {thunkCreator} from "./redux/actionCreator";
 import LoginContainer from "./components/Login/LoginContainer";
 import Preloader from "./components/Preloader/Preloader";
+import store from "./redux/reduxState";
 
 class App extends React.Component {
     constructor(props) {
@@ -49,4 +50,14 @@ let mapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
 
-export default connect(mapStateToProps, {initialize: thunkCreator.initializeApp})(App);
+const AppContent = connect(mapStateToProps, {initialize: thunkCreator.initializeApp})(App);
+
+export default () => {
+    return (
+        <React.StrictMode>
+            <Provider store={store}>
+                <AppContent/>
+            </Provider>
+        </React.StrictMode>
+    )
+}

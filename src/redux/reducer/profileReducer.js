@@ -45,6 +45,12 @@ function toggleIsFetching(state, isFetching) {
     }
 }
 
+function deletePost(state, postId) {
+    return {
+        ...state,
+        posts: state.posts.filter(p => p.id !== postId)
+    }
+}
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_POST:
@@ -55,6 +61,8 @@ const profileReducer = (state = initialState, action) => {
             return toggleIsFetching(state, action.isFetching);
         case actionTypes.UPDATE_PROFILE_STATUS:
             return setStatus(state, action.status);
+        case actionTypes.DELETE_POST:
+            return deletePost(state, action.postId);
         default:
             return state;
     }

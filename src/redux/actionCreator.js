@@ -7,6 +7,10 @@ const actionCreator = {
         type: actionTypes.ADD_MSG,
         newMsg: msg
     }),
+    onDeletePost: (postId) => ({
+        type: actionTypes.DELETE_POST,
+        postId
+    }),
     onAddPost: (post) => ({
         type: actionTypes.ADD_POST,
         newPost: post
