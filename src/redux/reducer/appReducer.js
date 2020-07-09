@@ -1,12 +1,14 @@
-import actionTypes from "../actionTypes";
+import { getAuthUser } from "./authReducer";
 
 const initialState = {
     initialized: false
 };
 
-const appReducer = (state = initialState, action) => {
+const INITIALIZED_SUCCESSFULLY = "app/INITIALIZED_SUCCESSFULLY";
+
+export default (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.INITIALIZED_SUCCESSFULLY:
+        case INITIALIZED_SUCCESSFULLY:
             return {
                 ...state,
                 initialized: true
@@ -16,4 +18,15 @@ const appReducer = (state = initialState, action) => {
     }
 };
 
-export default appReducer;
+export function onInitializedAction() {
+    return {
+        type: INITIALIZED_SUCCESSFULLY
+    }
+}
+
+export function initializeApp() {
+    return async dispatch => {
+        await dispatch(getAuthUser());
+        dispatch(onInitializedAction());
+    }
+}

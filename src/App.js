@@ -11,15 +11,15 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
-import {thunkCreator} from "./redux/actionCreator";
 import LoginContainer from "./components/Login/LoginContainer";
 import Preloader from "./components/Preloader/Preloader";
 import store from "./redux/reduxState";
+import {initializeApp} from "./redux/reducer/appReducer";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.props.initialize();
+        this.props.initializeApp();
     }
 
     render() {
@@ -46,11 +46,10 @@ class App extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
     initialized: state.app.initialized
 });
 
-const AppContent = connect(mapStateToProps, {initialize: thunkCreator.initializeApp})(App);
+const AppContent = connect(mapStateToProps, { initializeApp })(App);
 
 export default () => {
     return (

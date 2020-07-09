@@ -1,6 +1,5 @@
 import React from "react";
 import {connect} from "react-redux";
-import {thunkCreator} from "../../redux/actionCreator";
 import Users from './Users';
 import Preloader from "../Preloader/Preloader";
 import {
@@ -9,6 +8,7 @@ import {
     getIsFetching, getPageSize,
     getUsers, getUsersTotalCount
 } from "../../selectors/stateSelector";
+import {fetchUsers, followUser, unfollowUser} from "../../redux/reducer/userReducer";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -16,7 +16,7 @@ class UsersContainer extends React.Component {
     };
 
     loadUsers = (page) => {
-        this.props.getUsers(page, this.props.pageSize);
+        this.props.fetchUsers(page, this.props.pageSize);
     };
 
     render() {
@@ -26,8 +26,8 @@ class UsersContainer extends React.Component {
                      pageSize={this.props.pageSize}
                      currentPage={this.props.currentPage}
                      users={this.props.users}
-                     onFollow={this.props.onFollow}
-                     onUnfollow={this.props.onUnfollow}
+                     onFollow={this.props.followUser}
+                     onUnfollow={this.props.unfollowUser}
                      getUsers={this.loadUsers}
                      following={this.props.following}
                      isAuth={this.props.isAuth}
@@ -52,7 +52,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-    onFollow: thunkCreator.followUser,
-    onUnfollow: thunkCreator.unfollowUser,
-    getUsers: thunkCreator.getUsers
+    followUser, unfollowUser, fetchUsers
 })(UsersContainer);

@@ -2,8 +2,8 @@ import React from "react";
 import Login from "./Login";
 import {Redirect, withRouter} from "react-router-dom";
 import {compose} from "redux";
-import {thunkCreator} from "../../redux/actionCreator";
 import {connect} from "react-redux";
+import {login} from "../../redux/reducer/authReducer";
 
 class LoginContainer extends React.Component {
     render() {
@@ -17,5 +17,5 @@ class LoginContainer extends React.Component {
 
 export default compose(
     withRouter,
-    connect((state) => ({isAuth: state.auth.isAuth}), {login: thunkCreator.login})
+    connect((state) => ({isAuth: state.auth.isAuth}), { login })
 )(LoginContainer);

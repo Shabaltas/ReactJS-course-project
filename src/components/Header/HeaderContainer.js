@@ -1,9 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import Header from "./Header";
-import {thunkCreator} from "../../redux/actionCreator";
 import {withRouter} from "react-router-dom";
 import {getIsAuth, getLogin} from "../../selectors/stateSelector";
+import {logout} from "../../redux/reducer/authReducer";
 
 class HeaderContainer extends React.Component {
     logout = () => {
@@ -22,4 +22,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default withRouter(connect(mapStateToProps, {logout: thunkCreator.logout})(HeaderContainer));
+export default withRouter(connect(mapStateToProps, { logout })(HeaderContainer));

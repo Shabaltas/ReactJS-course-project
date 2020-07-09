@@ -1,12 +1,12 @@
 import React from "react";
 import s from './Components.module.css';
+import {Field} from "redux-form";
 
-//TODO get rid of copy-past, give props to children
 const FormControl = ({input, meta, ...props}) => {
     let hasError = meta.touched && meta.invalid && !meta.active;
     return (
         <div>
-            <div className={s.text + " " + (hasError ? s.error_field : "")}>
+            <div className={s.form_control + " " + (hasError ? s.error_div : "")}>
                 {props.children}
             </div>
             {hasError ? <div><span className={s.error_msg}>{meta.error}</span></div> : <></>}
@@ -14,26 +14,24 @@ const FormControl = ({input, meta, ...props}) => {
     )
 };
 
-export const Textarea = ({input, meta, ...props}) => {
-    let hasError = meta.touched && meta.invalid && !meta.active;
+export const Textarea = ({input, meta, children, ...childProps}) => {
     return (
-        <div>
-            <div>
-                <textarea className={(hasError ? s.error_div : "")} {...input} {...props}/>
-            </div>
-            {hasError ? <div><span className={s.error_msg}>{meta.error}</span></div> : <></>}
-        </div>
-    )
+        <FormControl input={input} meta={meta}>
+            <textarea {...input} {...childProps}/>
+        </FormControl>)
 };
 
-export const Input = ({input, meta, ...props}) => {
-    let hasError = meta.touched && meta.invalid && !meta.active;
+export const Input = ({input, meta, children, ...childProps}) =>
+    <FormControl input={input} meta={meta}>
+        <input {...input} {...childProps}/>
+    </FormControl>;
+
+export function createField(name, component, validators, props, text = "") {
     return (
         <div>
-            <div>
-                <input className={(hasError ? s.error_div : "")} {...input} {...props}/>
-            </div>
-            {hasError ? <div><span className={s.error_msg}>{meta.error}</span></div> : <></>}
+            <Field name={name} component={component} validate={validators}
+                   {...props}/> {text}
         </div>
     )
-};
+}
+

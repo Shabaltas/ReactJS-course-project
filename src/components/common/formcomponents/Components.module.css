@@ -1,8 +1,8 @@
-.text {
+.form_control input, textarea {
     border: solid 1px black;
 }
 
-.error_div {
+.form_control.error_div textarea, input{
     border: solid red 2px;
 }
 

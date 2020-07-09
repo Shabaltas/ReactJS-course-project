@@ -1,4 +1,4 @@
-import actionTypes from "../actionTypes";
+import api from "../../api/api";
 
 const initialState = {
     posts: [
@@ -11,6 +11,12 @@ const initialState = {
     status: '',
     isFetching: false
 };
+
+const ADD_POST = "profile/ADD_POST";
+const SET_PROFILE = "profile/SET_PROFILE";
+const TOGGLE_IS_FETCHING = "profile/TOGGLE_IS_FETCHING";
+const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS";
+const DELETE_POST = "profile/DELETE_POST";
 
 function addPost(state, newPost) {
     return {
@@ -51,21 +57,76 @@ function deletePost(state, postId) {
         posts: state.posts.filter(p => p.id !== postId)
     }
 }
+
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_POST:
+        case ADD_POST:
             return addPost(state, action.newPost);
-        case actionTypes.SET_PROFILE:
+        case SET_PROFILE:
             return setProfile(state, action.profile, action.status);
-        case actionTypes.TOGGLE_IS_FETCHING:
+        case TOGGLE_IS_FETCHING:
             return toggleIsFetching(state, action.isFetching);
-        case actionTypes.UPDATE_PROFILE_STATUS:
+        case SET_PROFILE_STATUS:
             return setStatus(state, action.status);
-        case actionTypes.DELETE_POST:
+        case DELETE_POST:
             return deletePost(state, action.postId);
         default:
             return state;
     }
 };
+
+export function deletePostAction(postId) {
+    return {
+        type: DELETE_POST,
+        postId
+    }
+}
+
+export function addPostAction(post) {
+    return {
+        type: ADD_POST,
+        newPost: post
+    }
+}
+
+export function toggleIsFetchingAction(isFetching) {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching
+    }
+}
+
+export function setProfileAction(profile, status) {
+    return {
+        type: SET_PROFILE,
+        profile,
+        status
+    }
+}
+
+export function updateStatusAction(newStatus) {
+    return {
+        type: SET_PROFILE_STATUS,
+        status: newStatus
+    }
+}
+
+export function getProfileInfo(userId) {
+    return async dispatch => {
+        dispatch(toggleIsFetchingAction(true));
+        const profile = await api.getProfileInfo(userId);
+        const status = await api.getProfileStatus(userId);
+        dispatch(toggleIsFetchingAction(false));
+        dispatch(setProfileAction(profile, status));
+    };
+}
+
+export function updateProfileStatus(newStatus) {
+    return async dispatch => {
+        const data = await api.updateProfileStatus(newStatus);
+        if (!data.resultCode)
+            dispatch(updateStatusAction(newStatus));
+    }
+}
 
 export default profileReducer;

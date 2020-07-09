@@ -1,22 +1,16 @@
 import React from 'react';
 import {Field, Form, reduxForm} from "redux-form";
 import {minLengthValidator, required} from "../common/validator/validator";
-import {Input} from "../common/formcomponents/Components";
+import {createField, Input} from "../common/formcomponents/Components";
 import s from "../common/formcomponents/Components.module.css";
 const minLength = minLengthValidator(8);
 
 let LoginForm = (props) => {
     return (
         <Form onSubmit={props.handleSubmit}>
-            <div>
-                <Field name={"email"} placeholder={"Email"} component={Input}  type={"email"} validate={[required]}/>
-            </div>
-            <div>
-                <Field name={"password"} placeholder={"Password"} component={Input} type={"password"} validate={[required, minLength]}/>
-            </div>
-            <div>
-                <Field name={"rememberMe"} component="input" type={"checkbox"}/> remember me
-            </div>
+            {createField("email", Input, [required], {type: "email", placeholder: "Email"})}
+            {createField("password", Input, [required, minLength], {type: "password", placeholder: "Password"})}
+            {createField("rememberMe", "input", null, {type: "checkbox"}, "remember me")}
             {props.error
                 ? <div>
                     <span className={s.error_msg}>{props.error}</span>

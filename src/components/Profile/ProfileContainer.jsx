@@ -1,10 +1,10 @@
 import React from "react";
-import {thunkCreator} from "../../redux/actionCreator";
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {getAuthorizedId, getIsAuth, getPosts, getProfile, getProfileStatus} from "../../selectors/stateSelector";
+import {getProfileInfo, updateProfileStatus} from "../../redux/reducer/profileReducer";
 
 class ProfileContainer extends React.Component {
     userId;
@@ -35,7 +35,6 @@ let mapStateToProps = (state) => {
 export default compose(
     withRouter,
     connect(mapStateToProps, {
-        getProfileInfo: thunkCreator.getProfileInfo,
-        updateProfileStatus: thunkCreator.updateProfileStatus
+        getProfileInfo, updateProfileStatus
     }),
 )(ProfileContainer);

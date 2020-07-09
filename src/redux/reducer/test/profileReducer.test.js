@@ -1,6 +1,5 @@
 import React from "react";
-import actionCreator from "../../actionCreator";
-import profileReducer from "../profileReducer";
+import profileReducer, {addPostAction, deletePostAction} from "../profileReducer";
 
 const initialState = {
     posts: [
@@ -13,14 +12,14 @@ const initialState = {
 
 test('add post', () => {
     const newPostText = "NEW POST";
-    const action = actionCreator.onAddPost(newPostText);
+    const action = addPostAction(newPostText);
     const state = profileReducer(initialState, action);
     expect(state.posts.length).toBe(5);
 });
 
 test('add post exactly', () => {
     const newPostText = "NEW POST";
-    const action = actionCreator.onAddPost(newPostText);
+    const action = addPostAction(newPostText);
     const state = profileReducer(initialState, action);
     expect(state.posts).toStrictEqual([
         {id: 1, msg: "How r u all", likes: 12},
@@ -32,13 +31,13 @@ test('add post exactly', () => {
 });
 
 test('delete post', () => {
-    const action = actionCreator.onDeletePost(4);
+    const action = deletePostAction(4);
     const state = profileReducer(initialState, action);
     expect(state.posts.length).toBe(3);
 });
 
 test('delete post exactly', () => {
-    const action = actionCreator.onDeletePost(4);
+    const action = deletePostAction(4);
     const state = profileReducer(initialState, action);
     expect(state.posts).toStrictEqual([
             {id: 1, msg: "How r u all", likes: 12},

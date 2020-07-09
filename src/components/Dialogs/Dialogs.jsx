@@ -4,13 +4,13 @@ import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
 import {Field, Form, reduxForm} from "redux-form";
 import {required} from "../common/validator/validator";
-import {Textarea} from "../common/formcomponents/Components";
+import {createField, Textarea} from "../common/formcomponents/Components";
 
 let NewMsgForm = (props) => {
     return (
         <Form onSubmit={props.handleSubmit}>
-            <Field component={Textarea} name="newMsg" validate={required} placeholder="Enter new message"/>
-            <div><button className={s.btn}> Send</button></div>
+            {createField("newMsg", Textarea, [required], {placeholder: "Enter new message"})}
+            <button className={s.btn}> Send</button>
         </Form>)
 };
 

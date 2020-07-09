@@ -1,4 +1,3 @@
-import actionTypes from "../actionTypes";
 import ava1 from "../../resources/ava1.png";
 import ava2 from "../../resources/ava2.png";
 import ava3 from "../../resources/ava3.png";
@@ -16,6 +15,8 @@ const initialState = {
     changeableMsgTxt: ''
 };
 
+const ADD_MSG = "dialogs/ADD_MSG";
+
 function addMsg(state, newMsg) {
     return {
         ...state,
@@ -28,11 +29,18 @@ function addMsg(state, newMsg) {
 
 const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.ADD_MSG:
+        case ADD_MSG:
             return addMsg(state, action.newMsg);
         default:
             return state;
     }
 };
+
+export function onAddMsg(msg) {
+    return {
+        type: ADD_MSG,
+        newMsg: msg
+    }
+}
 
 export default dialogReducer;
