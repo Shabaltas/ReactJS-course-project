@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import Dialog from "./Dialog/Dialog";
-import {Field, Form, reduxForm} from "redux-form";
+import { Form, reduxForm} from "redux-form";
 import {required} from "../common/validator/validator";
 import {createField, Textarea} from "../common/formcomponents/Components";
 
