@@ -26,7 +26,7 @@ class App extends React.Component {
 
     render() {
         return this.props.initialized
-            ? <BrowserRouter>
+            ? <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <div className='app-wrapper'>
                     <HeaderContainer/>
                     <NavbarContainer/>
