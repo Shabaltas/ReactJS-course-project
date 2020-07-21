@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/ReactJS-course-project/static/css/main.ee03fd8a.chunk.css",
-    "main.js": "/ReactJS-course-project/static/js/main.6685af3d.chunk.js",
-    "main.js.map": "/ReactJS-course-project/static/js/main.6685af3d.chunk.js.map",
+    "main.js": "/ReactJS-course-project/static/js/main.4fb51b83.chunk.js",
+    "main.js.map": "/ReactJS-course-project/static/js/main.4fb51b83.chunk.js.map",
     "runtime-main.js": "/ReactJS-course-project/static/js/runtime-main.98fedd7a.js",
     "runtime-main.js.map": "/ReactJS-course-project/static/js/runtime-main.98fedd7a.js.map",
     "static/js/2.844d35d1.chunk.js": "/ReactJS-course-project/static/js/2.844d35d1.chunk.js",
@@ -25,7 +25,7 @@
     "static/js/8.b8f28b3e.chunk.js": "/ReactJS-course-project/static/js/8.b8f28b3e.chunk.js",
     "static/js/8.b8f28b3e.chunk.js.map": "/ReactJS-course-project/static/js/8.b8f28b3e.chunk.js.map",
     "index.html": "/ReactJS-course-project/index.html",
-    "precache-manifest.a092f16a1ace75ade7cd0d95fbc7d20b.js": "/ReactJS-course-project/precache-manifest.a092f16a1ace75ade7cd0d95fbc7d20b.js",
+    "precache-manifest.0f556f3bc6097b0de74bcba00777bf3f.js": "/ReactJS-course-project/precache-manifest.0f556f3bc6097b0de74bcba00777bf3f.js",
     "service-worker.js": "/ReactJS-course-project/service-worker.js",
     "static/css/3.d49337a1.chunk.css.map": "/ReactJS-course-project/static/css/3.d49337a1.chunk.css.map",
     "static/css/4.2b283795.chunk.css.map": "/ReactJS-course-project/static/css/4.2b283795.chunk.css.map",
@@ -45,6 +45,6 @@
     "static/js/runtime-main.98fedd7a.js",
     "static/js/2.844d35d1.chunk.js",
     "static/css/main.ee03fd8a.chunk.css",
-    "static/js/main.6685af3d.chunk.js"
+    "static/js/main.4fb51b83.chunk.js"
   ]
 }
