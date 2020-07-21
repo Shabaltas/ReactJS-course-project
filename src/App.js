@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Route, HashRouter} from 'react-router-dom';
 import './App.css';
 import './CustomApp.css';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
@@ -26,7 +26,7 @@ class App extends React.Component {
 
     render() {
         return this.props.initialized
-            ? <BrowserRouter basename={process.env.PUBLIC_URL}>
+            ? <HashRouter>
                 <div className='app-wrapper'>
                     <HeaderContainer/>
                     <NavbarContainer/>
@@ -42,7 +42,7 @@ class App extends React.Component {
                         />
                     </div>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
             : <Preloader/>
     }
 }
