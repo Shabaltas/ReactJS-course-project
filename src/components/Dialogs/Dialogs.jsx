@@ -6,6 +6,7 @@ import { Form, reduxForm} from "redux-form";
 import {required} from "../common/validator/validator";
 import {createField, Textarea} from "../common/formcomponents/Components";
 
+const NewMsgFormName = "newMsg";
 let NewMsgForm = (props) => {
     return (
         <Form onSubmit={props.handleSubmit}>
@@ -14,7 +15,7 @@ let NewMsgForm = (props) => {
         </Form>)
 };
 
-NewMsgForm = reduxForm({form: "newMsg"})(NewMsgForm);
+NewMsgForm = reduxForm({form: NewMsgFormName})(NewMsgForm);
 
 const Dialogs = (props) => {
     return (
@@ -26,7 +27,7 @@ const Dialogs = (props) => {
             <div className={s.dialogs__messages}>
                 {props.data.messages.map(msg => <Message key={msg.id} text={msg.text}/>)}
             </div>
-            <NewMsgForm onSubmit={(values) => props.onAddMsg(values.newMsg)}/>
+            <NewMsgForm onSubmit={(values) => { props.onAddMsg(values.newMsg); props.resetForm(NewMsgFormName)}}/>
         </div>
     )
 };

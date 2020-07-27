@@ -1,4 +1,5 @@
 import api from "../../api/api";
+import {stopSubmit} from "redux-form";
 
 const initialState = {
     posts: [
@@ -80,7 +81,7 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST:
             return deletePost(state, action.postId);
         case SAVE_PHOTO_SUCCESS:
-            return  updatePhotos(state, action.photos);
+            return updatePhotos(state, action.photos);
         default:
             return state;
     }
@@ -142,15 +143,28 @@ export function getProfileInfo(userId) {
 export function updateProfileStatus(newStatus) {
     return async dispatch => {
         const data = await api.updateProfileStatus(newStatus);
-        if (!data.resultCode)
+        if (data.resultCode === 0)
             dispatch(updateStatusAction(newStatus));
     }
 }
 
+export function updateProfile(profile) {
+    return async (dispatch, getState) => {
+        const data = await api.updateProfile(profile);
+        if (data.resultCode === 0)
+            dispatch(getProfileInfo(getState().auth.userId));
+        else {
+            dispatch(stopSubmit('profileData', {_error: data.messages.length > 0 ? data.messages[0] : "Some error occurred"}));
+            return Promise.reject(data.messages[0]);
+        }
+    }
+}
+
+
 export function savePhoto(photo) {
     return async dispatch => {
         const data = await api.savePhoto(photo);
-        if (!data.resultCode)
+        if (data.resultCode === 0)
             dispatch(updatePhotoAction(data.data.photos));
     }
 }

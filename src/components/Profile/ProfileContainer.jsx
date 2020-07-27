@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import {getAuthorizedId, getIsAuth, getPosts, getProfile, getProfileStatus} from "../../selectors/stateSelector";
-import {getProfileInfo, savePhoto, updateProfileStatus} from "../../redux/reducer/profileReducer";
+import {getProfileInfo, savePhoto, updateProfile, updateProfileStatus} from "../../redux/reducer/profileReducer";
 
 class ProfileContainer extends React.Component {
     userId;
@@ -44,6 +44,6 @@ let mapStateToProps = (state) => {
 export default compose(
     withRouter,
     connect(mapStateToProps, {
-        getProfileInfo, updateProfileStatus, savePhoto
+        getProfileInfo, updateProfileStatus, savePhoto, updateProfile
     }),
 )(ProfileContainer);

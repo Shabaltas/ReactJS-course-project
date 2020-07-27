@@ -37,6 +37,10 @@ const api = {
         return apiInstance.put(`${configs.apiProfileEndpoint}/status`, {status})
             .then(res => res.data);
     },
+    updateProfile(profile) {
+        return apiInstance.put(`${configs.apiProfileEndpoint}`, profile)
+            .then(res => res.data);
+    },
     savePhoto(photoFile) {
         let formData = new FormData();
         formData.append('photo', photoFile);
