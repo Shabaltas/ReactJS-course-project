@@ -37,6 +37,12 @@ const api = {
         return apiInstance.put(`${configs.apiProfileEndpoint}/status`, {status})
             .then(res => res.data);
     },
+    savePhoto(photoFile) {
+        let formData = new FormData();
+        formData.append('photo', photoFile);
+        return apiInstance.put(`${configs.apiProfileEndpoint}/photo`, formData, {'Content-Type': 'multipart/form-data'})
+            .then(res => res.data)
+    },
     login(email, password, rememberMe = false, captcha = true) {
         return apiInstance.post(`${configs.apiLoginEndpoint}`, {email, password, rememberMe, captcha})
             .then(res => res.data)

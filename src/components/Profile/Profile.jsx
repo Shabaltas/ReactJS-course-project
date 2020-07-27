@@ -11,7 +11,7 @@ class Profile extends React.Component {
             : <div>
                 <ProfileInfo {...this.props.profile} status={this.props.status}
                              updateStatus={this.props.updateProfileStatus}
-                             isAuthedUser={this.props.authedUser}/>
+                             isAuthedUser={this.props.authedUser} savePhoto={this.props.savePhoto}/>
                 {this.props.authedUser ? <MyPostsContainer posts={this.props.posts}/> :
                     <UserPosts posts={this.props.posts}/>}
             </div>

@@ -6,18 +6,23 @@ import ProfileStatus from "./ProfileStatus";
 
 // equivalent for class components is shouldComponentUpdate(nextProps, nextState) or extends PoorComponent
 const ProfileInfo = React.memo((props) => {
+    const updateAvatar = e => {
+        if (e.target.files.length)
+         props.savePhoto(e.target.files[0]);
+    };
+
     return (
         <div>
             <div>
                 <img className={s.top_img} src={contentTop}/>
             </div>
             <div className={s.profile__info}>
-                <img className={s.ava} src={props.photos.large ? props.photos.large : replace}/>
+                <img className={s.ava} src={props.photos.large || replace}/>
                 <div style={{padding: "10px"}}>
                     <h3>{props.fullName}</h3>
                     {
                         props.isAuthedUser
-                            ? <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                            ? <><div><input type="file" onChange={updateAvatar}/></div><ProfileStatus status={props.status} updateStatus={props.updateStatus}/></>
                             : <div><span>{props.status || "___________"}</span></div>
                     }
                     <h5>About me:{` ${props.aboutMe}`}</h5>

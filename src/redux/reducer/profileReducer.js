@@ -17,6 +17,7 @@ const SET_PROFILE = "profile/SET_PROFILE";
 const TOGGLE_IS_FETCHING = "profile/TOGGLE_IS_FETCHING";
 const SET_PROFILE_STATUS = "profile/SET_PROFILE_STATUS";
 const DELETE_POST = "profile/DELETE_POST";
+const SAVE_PHOTO_SUCCESS = "profile/SAVE_PHOTO_SUCCESS";
 
 function addPost(state, newPost) {
     return {
@@ -58,6 +59,14 @@ function deletePost(state, postId) {
     }
 }
 
+function updatePhotos(state, photos) {
+    let profile = {...state.profile, photos};
+    return {
+        ...state,
+        profile
+    }
+}
+
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
@@ -70,6 +79,8 @@ const profileReducer = (state = initialState, action) => {
             return setStatus(state, action.status);
         case DELETE_POST:
             return deletePost(state, action.postId);
+        case SAVE_PHOTO_SUCCESS:
+            return  updatePhotos(state, action.photos);
         default:
             return state;
     }
@@ -111,6 +122,13 @@ export function updateStatusAction(newStatus) {
     }
 }
 
+export function updatePhotoAction(photos) {
+    return {
+        type: SAVE_PHOTO_SUCCESS,
+        photos
+    }
+}
+
 export function getProfileInfo(userId) {
     return async dispatch => {
         dispatch(toggleIsFetchingAction(true));
@@ -126,6 +144,14 @@ export function updateProfileStatus(newStatus) {
         const data = await api.updateProfileStatus(newStatus);
         if (!data.resultCode)
             dispatch(updateStatusAction(newStatus));
+    }
+}
+
+export function savePhoto(photo) {
+    return async dispatch => {
+        const data = await api.savePhoto(photo);
+        if (!data.resultCode)
+            dispatch(updatePhotoAction(data.data.photos));
     }
 }
 
