@@ -39,7 +39,6 @@ const ProfileData = (props) => {
 };
 
 let ProfileDataForm = (props) => {
-    debugger;
     return (
         <Form onSubmit={props.handleSubmit}>
             <h4>Fullname</h4>{createField("fullName", Input, [required], {placeholder: "FullName"})}

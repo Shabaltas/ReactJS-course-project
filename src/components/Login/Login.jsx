@@ -11,6 +11,10 @@ let LoginForm = (props) => {
             {createField("email", Input, [required], {type: "email", placeholder: "Email"})}
             {createField("password", Input, [required, minLength], {type: "password", placeholder: "Password"})}
             {createField("rememberMe", "input", null, {type: "checkbox"}, "remember me")}
+            {props.captchaUrl && <>
+                <img src={props.captchaUrl}/>
+                {createField("captcha", Input, [required], {placeholder: "Enter captcha"})}
+            </>}
             {props.error
                 ? <div>
                     <span className={s.error_msg}>{props.error}</span>
@@ -29,13 +33,14 @@ LoginForm = reduxForm({
 
 const Login = (props) => {
     const login = (values) => {
-        props.onLogin(values.email, values.password, values.rememberMe);
+        debugger;
+        props.onLogin(values);
     };
 
     return (
         <div>
             <h2>Login</h2>
-            <LoginForm onSubmit={login}/>
+            <LoginForm onSubmit={login} captchaUrl={props.captchaUrl}/>
         </div>
     )
 };

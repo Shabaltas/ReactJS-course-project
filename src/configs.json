@@ -6,5 +6,6 @@
   "apiFollowEndpoint": "follow",
   "apiLoginEndpoint": "auth/login",
   "apiLogoutEndpoint": "auth/logout",
+  "apiCaptchaEndpoint": "security/get-captcha-url",
   "apiKey": "1b44dd06-2645-4fda-bc7a-6c8f3e5f9b32"
 }

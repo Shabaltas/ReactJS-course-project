@@ -14,9 +14,7 @@ const ProfileInfo = React.memo((props) => {
     };
 
     const updateProfile = (profile) => {
-        let c = props.updateProfile(profile);
-            debugger;
-        c.then(res => {
+        props.updateProfile(profile).then(res => {
             toggleEditMode(false)
         });
     };

@@ -47,13 +47,18 @@ const api = {
         return apiInstance.put(`${configs.apiProfileEndpoint}/photo`, formData, {'Content-Type': 'multipart/form-data'})
             .then(res => res.data)
     },
-    login(email, password, rememberMe = false, captcha = true) {
+    login(email, password, rememberMe = false, captcha = null) {
+        debugger;
         return apiInstance.post(`${configs.apiLoginEndpoint}`, {email, password, rememberMe, captcha})
             .then(res => res.data)
     },
     logout() {
         return apiInstance.post(`${configs.apiLogoutEndpoint}`)
             .then(res => res.data)
+    },
+    getCaptchaUrl() {
+        return apiInstance.post(`${configs.apiCaptchaEndpoint}`)
+            .then(res => res.data.url)
     }
 };
 
