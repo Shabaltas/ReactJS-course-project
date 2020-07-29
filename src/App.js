@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
 import './CustomApp.css';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
@@ -50,7 +50,7 @@ class App extends React.Component {
                 <Error reason={this.props.error}/>
             </Dialog>
             : this.props.initialized
-                ? <HashRouter>
+                ? <BrowserRouter>
                     <div className='app-wrapper'>
                         <HeaderContainer/>
                         <NavbarContainer/>
@@ -68,7 +68,7 @@ class App extends React.Component {
                             </Switch>
                         </div>
                     </div>
-                </HashRouter>
+                </BrowserRouter>
                 : <Preloader/>
     }
 }
