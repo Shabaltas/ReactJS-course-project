@@ -26,7 +26,9 @@ export function onInitializedAction() {
 
 export function initializeApp() {
     return async dispatch => {
-        await dispatch(getAuthUser());
-        dispatch(onInitializedAction());
+        try {
+            await dispatch(getAuthUser());
+            dispatch(onInitializedAction());
+        } catch {}
     }
 }

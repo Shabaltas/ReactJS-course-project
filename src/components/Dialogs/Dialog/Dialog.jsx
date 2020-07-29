@@ -1,10 +1,11 @@
 import s from "../Dialogs.module.css";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import cn from "classnames";
 
 const Dialog = (props) => {
     return (
-        <table className={s.dialog}>
+        <table className={cn(s.dialog)}>
             <thead>
             <tr>
                 <td>

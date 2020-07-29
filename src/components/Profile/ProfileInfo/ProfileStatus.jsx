@@ -24,7 +24,7 @@ const ProfileStatus = (props) => {
                    onBlur={() => {
                        toggleEditMode(false);
                        props.updateStatus(inputStatus);
-                   }} maxLength={300}/>
+                   }} maxLength={1000}/>
         </div>
         : <div>
             <span onDoubleClick={() => toggleEditMode(true)}>{props.status || "___________"}</span>

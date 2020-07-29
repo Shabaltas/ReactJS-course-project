@@ -33,7 +33,6 @@ LoginForm = reduxForm({
 
 const Login = (props) => {
     const login = (values) => {
-        debugger;
         props.onLogin(values);
     };
 

@@ -1,5 +1,6 @@
 import api from "../../api/api";
 import {stopSubmit} from "redux-form";
+import {setErrorAction} from "./errorReducer";
 
 const initialState = {
     posts: [
@@ -145,6 +146,7 @@ export function updateProfileStatus(newStatus) {
         const data = await api.updateProfileStatus(newStatus);
         if (data.resultCode === 0)
             dispatch(updateStatusAction(newStatus));
+        else dispatch(setErrorAction(data.messages[0]))
     }
 }
 

@@ -11,6 +11,7 @@ const apiInstance = axios.create({
 
 const api = {
     authMe() {
+        //return Promise.reject("yes, authme failed, u r loser");
         return apiInstance.get(configs.apiAuthMeEndpoint).then(resp => resp.data);
     },
     getUsers(page, pageSize) {
@@ -48,7 +49,6 @@ const api = {
             .then(res => res.data)
     },
     login(email, password, rememberMe = false, captcha = null) {
-        debugger;
         return apiInstance.post(`${configs.apiLoginEndpoint}`, {email, password, rememberMe, captcha})
             .then(res => res.data)
     },
