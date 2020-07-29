@@ -1,2 +1,0 @@
-(this.webpackJsonpcourse_project_01=this.webpackJsonpcourse_project_01||[]).push([[4],{306:function(e,t,c){},324:function(e,t,c){"use strict";c.r(t);var n=c(0),u=c.n(n);c(306);t.default=function(e){return u.a.createElement("div",null,"Music")}}}]);
-//# sourceMappingURL=4.dc42848d.chunk.js.map
