@@ -4,7 +4,6 @@ import Post from "./Post/Post.jsx";
 import {Form, reduxForm, reset} from "redux-form";
 import {maxLengthValidator, required} from "../../common/validator/validator";
 import {createField, Textarea} from "../../common/formcomponents/Components";
-import withFormReset from "../../../hoc/withFormReset";
 
 const postMaxLength = 300;
 const maxLength = maxLengthValidator(postMaxLength);

@@ -34,11 +34,13 @@ const getIsFetching = (state) => state.usersPage.isFetching;
 //for disabling btn "FOLLOW/UNFOLLOW" while in progress
 const getFollowingUsers = (state) => state.usersPage.following;
 
+const getCaptchaUrl = (state) => state.auth.captchaUrl;
+
 export {
     getDialogsData, getIsAuth, getLogin,
     getFriends, getProfile, getPosts,
     getProfileStatus, getAuthorizedId,
     getCurrentPage, getFollowingUsers,
     getIsFetching, getPageSize, getUsers,
-    getUsersTotalCount
+    getUsersTotalCount, getCaptchaUrl
 }

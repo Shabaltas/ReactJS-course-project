@@ -5,15 +5,13 @@ import {withRouter} from "react-router-dom";
 import {getIsAuth, getLogin} from "../../selectors/stateSelector";
 import {logout} from "../../redux/reducer/authReducer";
 
-class HeaderContainer extends React.Component {
-    logout = () => {
-        this.props.logout();
+const HeaderContainer = (props) => {
+    const logout = () => {
+        props.logout();
     };
 
-    render() {
-        return <Header login={this.props.login} isAuth={this.props.isAuth} logout={this.logout}/>
-    }
-}
+    return <Header login={props.login} isAuth={props.isAuth} logout={logout}/>
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -22,4 +20,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default withRouter(connect(mapStateToProps, { logout })(HeaderContainer));
+export default withRouter(connect(mapStateToProps, {logout})(HeaderContainer));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
 import './CustomApp.css';
@@ -21,57 +21,49 @@ const Settings = React.lazy(() => import('./components/Settings/Settings'));
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.props.initializeApp();
-    }
+const App = (props) => {
 
-    catchAllUnhandledRejection = (event) => {
+    const catchAllUnhandledRejection = (event) => {
         console.log(event.promise);
         alert(event.reason);
     };
+    
+    useEffect(() => {
+        props.initializeApp();
+        window.addEventListener("unhandledrejection", catchAllUnhandledRejection);
+        return () => window.removeEventListener("unhandledrejection", catchAllUnhandledRejection);
+    }, []);
 
-    componentDidMount() {
-        window.addEventListener("unhandledrejection", this.catchAllUnhandledRejection)
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("unhandledrejection", this.catchAllUnhandledRejection);
-    }
-
-    closeDialog = () => {
-        this.props.clearError();
+    const closeDialog = () => {
+        props.clearError();
     };
 
-    render() {
-        return this.props.error
-            ? <Dialog aria-labelledby="simple-dialog-title" open={true} onClose={this.closeDialog}>
-                <Error reason={this.props.error}/>
-            </Dialog>
-            : this.props.initialized
-                ? <BrowserRouter>
-                    <div className='app-wrapper'>
-                        <HeaderContainer/>
-                        <NavbarContainer/>
-                        <div className='app-wrapper__content'>
-                            <Switch>
-                                <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                                <Route path='/dialogs' render={() => withSuspense(DialogsContainer)()}/>
-                                <Route path='/news' component={withSuspense(News)}/>
-                                <Route path='/music' component={withSuspense(Music)}/>
-                                <Route path='/settings' component={withSuspense(Settings)}/>
-                                <Route path='/users' component={withSuspense(UsersContainer)}/>
-                                <Route path='/login' component={LoginContainer}/>
-                                <Route path='/' exact render={() => <Redirect to='/profile'/>}/>
-                                <Route path='*' component={() => <div>404 NOT FOUND</div>}/>
-                            </Switch>
-                        </div>
+    return props.error
+        ? <Dialog aria-labelledby="simple-dialog-title" open={true} onClose={closeDialog}>
+            <Error reason={props.error}/>
+        </Dialog>
+        : props.initialized
+            ? <BrowserRouter basename={process.env.PUBLIC_URL}>
+                <div className='app-wrapper'>
+                    <HeaderContainer/>
+                    <NavbarContainer/>
+                    <div className='app-wrapper__content'>
+                        <Switch>
+                            <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                            <Route path='/dialogs' render={() => withSuspense(DialogsContainer)()}/>
+                            <Route path='/news' component={withSuspense(News)}/>
+                            <Route path='/music' component={withSuspense(Music)}/>
+                            <Route path='/settings' component={withSuspense(Settings)}/>
+                            <Route path='/users' component={withSuspense(UsersContainer)}/>
+                            <Route path='/login' component={LoginContainer}/>
+                            <Route path='/' exact render={() => <Redirect to='/profile'/>}/>
+                            <Route path='*' component={() => <div>404 NOT FOUND</div>}/>
+                        </Switch>
                     </div>
-                </BrowserRouter>
-                : <Preloader/>
-    }
-}
+                </div>
+            </BrowserRouter>
+            : <Preloader/>
+};
 
 let mapStateToProps = (state) => {
     return {

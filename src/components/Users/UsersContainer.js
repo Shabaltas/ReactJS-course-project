@@ -1,40 +1,41 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import Users from './Users';
 import Preloader from "../Preloader/Preloader";
 import {
-    getAuthorizedId, getCurrentPage,
-    getFollowingUsers, getIsAuth,
-    getIsFetching, getPageSize,
-    getUsers, getUsersTotalCount
+    getAuthorizedId,
+    getCurrentPage,
+    getFollowingUsers,
+    getIsAuth,
+    getIsFetching,
+    getPageSize,
+    getUsers,
+    getUsersTotalCount
 } from "../../selectors/stateSelector";
 import {fetchUsers, followUser, unfollowUser} from "../../redux/reducer/userReducer";
 
-class UsersContainer extends React.Component {
-    componentDidMount() {
-        this.loadUsers(this.props.currentPage);
+const UsersContainer = (props) => {
+    const loadUsers = (page) => {
+        props.fetchUsers(page, props.pageSize);
     };
 
-    loadUsers = (page) => {
-        this.props.fetchUsers(page, this.props.pageSize);
-    };
+    useEffect(() => {
+        loadUsers(props.currentPage)
+    }, []);
 
-    render() {
-        return this.props.isFetching
-            ? <Preloader/>
-            : <Users totalCount={this.props.totalCount}
-                     pageSize={this.props.pageSize}
-                     currentPage={this.props.currentPage}
-                     users={this.props.users}
-                     onFollow={this.props.followUser}
-                     onUnfollow={this.props.unfollowUser}
-                     getUsers={this.loadUsers}
-                     following={this.props.following}
-                     isAuth={this.props.isAuth}
-                     authorizedId={this.props.authorizedId}
-            />
-
-    }
+    return props.isFetching
+        ? <Preloader/>
+        : <Users totalCount={props.totalCount}
+                 pageSize={props.pageSize}
+                 currentPage={props.currentPage}
+                 users={props.users}
+                 onFollow={props.followUser}
+                 onUnfollow={props.unfollowUser}
+                 getUsers={loadUsers}
+                 following={props.following}
+                 isAuth={props.isAuth}
+                 authorizedId={props.authorizedId}
+        />
 }
 
 

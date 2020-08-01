@@ -17,17 +17,15 @@ const SimpleNavLink = (props) =>
         <NavLink to={props.to} activeClassName={s.active}>{props.title}</NavLink>
     </div>;
 
-class Navbar extends React.Component {
-    render() {
-        return (
-            <div className={s.nav}>
-                <nav>
-                    {NavLinks.map(navLink => <SimpleNavLink key={navLink.id} title={navLink.title} to={navLink.to}/>)}
-                </nav>
-                <Friends friends={this.props.friends}/>
-            </div>
-        )
-    };
-}
+const Navbar = (props) => {
+    return (
+        <div className={s.nav}>
+            <nav>
+                {NavLinks.map(navLink => <SimpleNavLink key={navLink.id} title={navLink.title} to={navLink.to}/>)}
+            </nav>
+            <Friends friends={props.friends}/>
+        </div>
+    )
+};
 
 export default Navbar;
