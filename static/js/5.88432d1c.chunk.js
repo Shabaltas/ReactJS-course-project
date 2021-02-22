@@ -1,0 +1,2 @@
+(this.webpackJsonpcourse_project_01=this.webpackJsonpcourse_project_01||[]).push([[5],{364:function(e,t,n){},370:function(e,t,n){"use strict";n.r(t);var c=n(0),r=n.n(c);n(364);t.default=function(e){return r.a.createElement("div",null,"News")}}}]);
+//# sourceMappingURL=5.88432d1c.chunk.js.map

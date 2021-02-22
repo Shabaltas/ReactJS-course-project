@@ -1,71 +1,71 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e1c5135e48eacaeeff66e94bd04c72b8",
+    "revision": "3f95a8126b5f467da35ca1f946fba638",
     "url": "/ReactJS-course-project/index.html"
   },
   {
-    "revision": "24cdb3173c7bf8636c39",
+    "revision": "54ee46524ce01f90aed5",
     "url": "/ReactJS-course-project/static/css/3.051752a9.chunk.css"
   },
   {
-    "revision": "e78dcc334ea4463fe7d4",
+    "revision": "c40bf0a572794b7c0bce",
     "url": "/ReactJS-course-project/static/css/4.2b283795.chunk.css"
   },
   {
-    "revision": "c074b4bf1ce43c923c7d",
+    "revision": "10aa1755285a19984c88",
     "url": "/ReactJS-course-project/static/css/5.25b44a53.chunk.css"
   },
   {
-    "revision": "72fe0b70539b79a023f3",
+    "revision": "9f0851a31a49853293b3",
     "url": "/ReactJS-course-project/static/css/6.0ab0ac3b.chunk.css"
   },
   {
-    "revision": "240383a4e9c48f4d66a2",
+    "revision": "174af7c1c23e5a1be5d1",
     "url": "/ReactJS-course-project/static/css/7.d875420a.chunk.css"
   },
   {
-    "revision": "56f1053ca751ac5c4be3",
+    "revision": "782c2447742ffda23a68",
     "url": "/ReactJS-course-project/static/css/main.afcaf043.chunk.css"
   },
   {
-    "revision": "d60f832c6ad64caab224",
-    "url": "/ReactJS-course-project/static/js/2.ee308359.chunk.js"
+    "revision": "ecb395acb57e2262e600",
+    "url": "/ReactJS-course-project/static/js/2.322a606a.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/ReactJS-course-project/static/js/2.ee308359.chunk.js.LICENSE.txt"
+    "url": "/ReactJS-course-project/static/js/2.322a606a.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "24cdb3173c7bf8636c39",
-    "url": "/ReactJS-course-project/static/js/3.fc63531e.chunk.js"
+    "revision": "54ee46524ce01f90aed5",
+    "url": "/ReactJS-course-project/static/js/3.3dc79b2d.chunk.js"
   },
   {
     "revision": "81896c98bac7b5b16ab1d3790da5b937",
-    "url": "/ReactJS-course-project/static/js/3.fc63531e.chunk.js.LICENSE.txt"
+    "url": "/ReactJS-course-project/static/js/3.3dc79b2d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e78dcc334ea4463fe7d4",
-    "url": "/ReactJS-course-project/static/js/4.443d46d3.chunk.js"
+    "revision": "c40bf0a572794b7c0bce",
+    "url": "/ReactJS-course-project/static/js/4.2d2d06c0.chunk.js"
   },
   {
-    "revision": "c074b4bf1ce43c923c7d",
-    "url": "/ReactJS-course-project/static/js/5.d92eee96.chunk.js"
+    "revision": "10aa1755285a19984c88",
+    "url": "/ReactJS-course-project/static/js/5.88432d1c.chunk.js"
   },
   {
-    "revision": "72fe0b70539b79a023f3",
-    "url": "/ReactJS-course-project/static/js/6.3de0605a.chunk.js"
+    "revision": "9f0851a31a49853293b3",
+    "url": "/ReactJS-course-project/static/js/6.7888cf84.chunk.js"
   },
   {
-    "revision": "240383a4e9c48f4d66a2",
-    "url": "/ReactJS-course-project/static/js/7.32a919c0.chunk.js"
+    "revision": "174af7c1c23e5a1be5d1",
+    "url": "/ReactJS-course-project/static/js/7.82ab72d5.chunk.js"
   },
   {
-    "revision": "56f1053ca751ac5c4be3",
-    "url": "/ReactJS-course-project/static/js/main.9fa50d78.chunk.js"
+    "revision": "782c2447742ffda23a68",
+    "url": "/ReactJS-course-project/static/js/main.06f2079e.chunk.js"
   },
   {
-    "revision": "05ef909506a5e60423f5",
-    "url": "/ReactJS-course-project/static/js/runtime-main.59648ab2.js"
+    "revision": "06ff0ca0ec6b54d151a4",
+    "url": "/ReactJS-course-project/static/js/runtime-main.6909c699.js"
   },
   {
     "revision": "d22f8f3dd8de4c228ca13b9dd50430a0",
